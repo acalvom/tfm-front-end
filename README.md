@@ -1,27 +1,21 @@
-# TfmFrontEnd
+# [Trabajo de Fin de Máster - Máster en Ingeniería Web](https://www.linkedin.com/in/andrea-calvo-moreno-63a71b115/)
+# Gestión de entrenamientos y reserva para una academia de policía
+> Este proyecto consiste en la parte cliente de aplicación web que gestiona los entrenamientos y el sistema de reservas en una 
+>academia de policía. Se desarrolla bajo el framework Angular.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
+## Tecnologías necesarias
+`TypeScript` `Angular` `Node` `npm` `GitHub` `GitHub Actions` `SonarCloud`
 
-## Development server
+## Estado del código
+* SonarCloud Budges: [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=acalvom_tfm-front-end&metric=alert_status)](https://sonarcloud.io/dashboard?id=acalvom_tfm-front-end)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## :octocat: Repositorios
+* [Proyecto centralizado](https://github.com/acalvom/tfm-management)
 
-## Code scaffolding
+## :gear: Ejecución en local
+1. Ejecutar en consola: `ng serve`
+2. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## :vertical_traffic_light: Running tests
+* Unit tests: Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* End-to-end tests: Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
