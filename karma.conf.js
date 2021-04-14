@@ -19,6 +19,7 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/tfm-front-end'),
       subdir: '.',
       reporters: [
+        { type: 'lcovonly' },
         { type: 'html' },
         { type: 'text-summary' }
       ]
