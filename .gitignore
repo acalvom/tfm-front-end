@@ -9,8 +9,8 @@
 
 # dependencies
 /node_modules
-/coverage/*
-!/coverage/lcov.info
+/coverage/tfm-front-end/*
+!/coverage/tfm-front-end/lcov.info
 
 # profiling files
 chrome-profiler-events*.json
