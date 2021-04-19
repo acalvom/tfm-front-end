@@ -9,14 +9,14 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" [(ngModel)]="password">
+      <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" [formControl]="password">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
     <button mat-raised-button color="primary"
-            (click)='loginUser(email.value,password)'>Login
+            (click)='loginUser()'>Login
     </button>
   </mat-card-content>
 </mat-card>

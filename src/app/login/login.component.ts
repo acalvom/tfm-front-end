@@ -13,19 +13,27 @@ export class LoginComponent implements OnInit {
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
-  password = '';
+  password = new FormControl('', [Validators.required]);
   hide = true;
 
   getErrorMessage() {
-    if (this.email.hasError('required')) {
+    if (this.email.hasError('required') || (this.password.hasError('required'))) {
       return 'You must enter a value';
     }
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    let emailErrorMessage = this.email.hasError('email') ? 'Not a valid email' : '';
+    let passwordErrorMessage = this.password.hasError('required') ? 'Password required' : '';
+    return (emailErrorMessage || passwordErrorMessage);
   }
 
-  loginUser(email: string, password: string): void {
-    this.connection.loginUser(email, password).subscribe();
-    console.log('Logged user and password: ' + email + '  ' + password);
+  loginUser(): void {
+    if (!this.getErrorMessage()) {
+      const userCredentials = {
+        email: this.email.value,
+        password: this.password.value
+      };
+      this.connection.loginUser(userCredentials).subscribe();
+      console.log('Logged user and password: ' + userCredentials.email + '  ' + userCredentials.password);
+    }
   }
 
   ngOnInit(): void {
