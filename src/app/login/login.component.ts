@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import {UserRestService} from '../shared/services/user-rest.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {
+  constructor(private connection: UserRestService) {
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -22,8 +23,9 @@ export class LoginComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  loginUser(email: FormControl, password: string): void {
-    console.log('Logged user and password: ' + email.value + '  ' + password);
+  loginUser(email: string, password: string): void {
+    this.connection.loginUser(email, password).subscribe();
+    console.log('Logged user and password: ' + email + '  ' + password);
   }
 
   ngOnInit(): void {

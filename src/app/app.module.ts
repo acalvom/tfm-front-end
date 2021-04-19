@@ -4,10 +4,12 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AngularMaterialModule} from './shared/angular-material.module';
+import {AngularMaterialModule} from './shared/material/angular-material.module';
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {UserRestService} from './shared/services/user-rest.service';
 
 
 @NgModule({
@@ -22,9 +24,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     BrowserModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserRestService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
