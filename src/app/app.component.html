@@ -1,40 +1,10 @@
 <mat-toolbar>
-  <span>My App</span>
+  <span>Gym Management</span>
   <span class="example-spacer"></span>
-  <button mat-button>Home</button>
-  <button mat-button>All Users</button>
-  <button mat-button>Reservas</button>
-  <button mat-button>Entrenamientos</button>
-  <button mat-button>Marcas</button>
-  <button mat-button>Mi perfil</button>
+  <a mat-button routerLink="home" routerLinkActive="active">Home</a>
+  <a mat-button routerLink="login" routerLinkActive="active">Login</a>
 </mat-toolbar>
 
-
-<section>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <div class="navbar-collapse collapse" id="navbar10">
-      <ul class="navbar-nav nav-fill w-100">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="all-users" routerLinkActive="active">All Users</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Reservas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Entrenamientos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Marcas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Mi perfil</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<section class="container">
+  <router-outlet></router-outlet>
 </section>
