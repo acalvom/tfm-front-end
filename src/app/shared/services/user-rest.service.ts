@@ -16,6 +16,11 @@ export class UserRestService {
   loginUser(userCredentials: object) {
     let url = this.BASE_URL + this.USERS + this.LOGIN;
     console.log(url);
-    return this.http.post(url, userCredentials); // need to add a observe response for the token
+    return this.http.post(url, userCredentials, {observe: 'response'}); // need to add a observe response for the token
+  }
+
+  setToken(email: string, token: string) {
+    let tokenInfo: string[] = [email, token];
+    sessionStorage.setItem('token', String(tokenInfo));
   }
 }
