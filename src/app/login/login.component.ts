@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   password = new FormControl('', [Validators.required]);
   hide = true;
   token;
+  role;
   loginStatusCode;
 
   getErrorMessage() {
@@ -37,14 +38,15 @@ export class LoginComponent implements OnInit {
       this.connection.loginUser(userCredentials).subscribe(
         response => {
           this.token = response.headers.get('Authorization');
-          this.connection.setToken(userCredentials.email, this.token);
+          this.role = response.headers.get('Role');
+          this.connection.setToken(userCredentials.email, this.role, this.token);
           this.loginStatusCode = response.status;
         },
         (error) => {
           this.loginStatusCode = error.status;
         }
       );
-      console.log('Logged user and password: ' + userCredentials.email + '  ' + userCredentials.password);
+      console.log('User: ' + userCredentials.email + ' Role: ' + this.role);
       console.log('Token: ' + this.token + ' Login Status: ' + this.loginStatusCode);
     }
   }
@@ -56,6 +58,9 @@ export class LoginComponent implements OnInit {
         console.log(res);
       }
     );
+    // console.log('is admin: ' + this.connection.isAdmin());
+    // console.log('is teacher: ' + this.connection.isTeacher());
+    // console.log('is student: ' + this.connection.isStudent());
   }
 
   ngOnInit(): void {
