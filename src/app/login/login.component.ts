@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {UserRestService} from '../shared/services/user-rest.service';
+import {AES} from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit {
     if (!this.getErrorMessage()) {
       const userCredentials = {
         email: this.email.value,
-        password: this.password.value
+        // password: this.password.value
+        password: AES.encrypt(this.password.value, 'password').toString()
       };
       this.connection.loginUser(userCredentials).subscribe();
       console.log('Logged user and password: ' + userCredentials.email + '  ' + userCredentials.password);
