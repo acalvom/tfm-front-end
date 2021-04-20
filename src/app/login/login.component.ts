@@ -49,6 +49,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  // This is only to validate token verification
+  sendToken(){
+    this.connection.validToken(this.email.value, this.token).subscribe(
+      (res) => {
+        console.log(res);
+      }
+    );
+  }
+
   ngOnInit(): void {
   }
 

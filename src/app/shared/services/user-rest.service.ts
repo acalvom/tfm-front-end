@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,11 @@ export class UserRestService {
   setToken(email: string, token: string) {
     let tokenInfo: string[] = [email, token];
     sessionStorage.setItem('token', String(tokenInfo));
+  }
+
+  // This is only to validate token verification
+  validToken(email: string, token: string) {
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this.http.get(this.BASE_URL + '/records/' + email, {headers});
   }
 }
