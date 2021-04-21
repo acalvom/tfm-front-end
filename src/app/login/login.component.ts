@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {UserRestService} from '../shared/services/user-rest.service';
+import {AuthService} from '../shared/services/auth.service';
 import {AES} from 'crypto-js';
 import {Router} from '@angular/router';
 
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userRestService: UserRestService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -36,34 +36,34 @@ export class LoginComponent implements OnInit {
         email: this.email.value,
         password: AES.encrypt(this.password.value, 'password').toString()
       };
-      this.userRestService.loginUser(userCredentials).subscribe(
+      this.authService.loginUser(userCredentials).subscribe(
         response => {
           this.token = response.headers.get('Authorization');
           this.role = response.headers.get('Role');
-          this.userRestService.setToken(userCredentials.email, this.role, this.token);
+          this.authService.setToken(userCredentials.email, this.role, this.token);
           this.loginStatusCode = response.status;
-          this.router.navigate(['home']);
+          this.router.navigate(['home']).then();
         },
         (error) => {
           this.loginStatusCode = error.status;
         }
       );
-      console.log('User: ' + userCredentials.email + ' Role: ' + this.role);
-      console.log('Token: ' + this.token + ' Login Status: ' + this.loginStatusCode);
+      // console.log('User: ' + userCredentials.email + ' Role: ' + this.role);
+      // console.log('Token: ' + this.token + ' Login Status: ' + this.loginStatusCode);
     }
   }
 
   // This is only to validate token verification
-  sendToken() {
-    this.userRestService.validToken(this.email.value, this.token).subscribe(
-      (res) => {
-        console.log(res);
-      }
-    );
-    // console.log('is admin: ' + this.connection.isAdmin());
-    // console.log('is teacher: ' + this.connection.isTeacher());
-    // console.log('is student: ' + this.connection.isStudent());
-  }
+  // sendToken() {
+  //   this.authService.validToken(this.email.value, this.token).subscribe(
+  //     (res) => {
+  //       console.log(res);
+  //     }
+  //   );
+  //   // console.log('is admin: ' + this.connection.isAdmin());
+  //   // console.log('is teacher: ' + this.connection.isTeacher());
+  //   // console.log('is student: ' + this.connection.isStudent());
+  // }
 
   ngOnInit(): void {
   }

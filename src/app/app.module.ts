@@ -9,7 +9,7 @@ import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {UserRestService} from './shared/services/user-rest.service';
+import {AuthService} from './shared/services/auth.service';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import {UserRestService} from './shared/services/user-rest.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserRestService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

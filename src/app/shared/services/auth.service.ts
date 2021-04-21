@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRestService {
+export class AuthService {
 
   private BASE_URL = 'http://localhost:8000';
   private USERS = '/users';
@@ -15,7 +15,6 @@ export class UserRestService {
 
   loginUser(userCredentials: object) {
     let url = this.BASE_URL + this.USERS + this.LOGIN;
-    //console.log(url);
     return this.http.post(url, userCredentials, {observe: 'response'});
   }
 
@@ -52,9 +51,9 @@ export class UserRestService {
     return (this.isAuthenticated()) && (this.getToken().split(',')[1] == 'student');
   }
 
-  // This is only to validate token verification
-  validToken(email: string, token: string) {
-    const headers = new HttpHeaders().set('Authorization', token);
-    return this.http.get(this.BASE_URL + '/records/' + email, {headers});
-  }
+  // // This is only to validate token verification
+  // validToken(email: string, token: string) {
+  //   const headers = new HttpHeaders().set('Authorization', token);
+  //   return this.http.get(this.BASE_URL + '/records/' + email, {headers});
+  // }
 }

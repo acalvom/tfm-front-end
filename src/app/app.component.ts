@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserRestService} from './shared/services/user-rest.service';
+import {AuthService} from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,26 +9,26 @@ import {UserRestService} from './shared/services/user-rest.service';
 export class AppComponent {
   title = 'tfm-front-end';
 
-  constructor(private userRestService: UserRestService) {
+  constructor(private authService: AuthService) {
   }
 
   logoutUser(): void {
-    this.userRestService.logoutUser();
+    this.authService.logoutUser();
   }
 
   isAuthenticated(): boolean {
-    return this.userRestService.isAuthenticated();
+    return this.authService.isAuthenticated();
   }
 
   isAdmin(): boolean {
-    return this.userRestService.isAdmin();
+    return this.authService.isAdmin();
   }
 
   isTeacher(): boolean {
-    return this.userRestService.isTeacher();
+    return this.authService.isTeacher();
   }
 
   isStudent(): boolean {
-    return this.userRestService.isStudent();
+    return this.authService.isStudent();
   }
 }
