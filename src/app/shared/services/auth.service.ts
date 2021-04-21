@@ -54,6 +54,6 @@ export class AuthService {
   // // This is only to validate token verification
   // validToken(email: string, token: string) {
   //   const headers = new HttpHeaders().set('Authorization', token);
-  //   return this.http.get(this.BASE_URL + '/records/' + email, {headers});
+  //   return this.http.get(this.BASE_URL + '/users/valToken/' + email, {headers});
   // }
 }
