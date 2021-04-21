@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {UserRestService} from '../shared/services/user-rest.service';
 import {AES} from 'crypto-js';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import {AES} from 'crypto-js';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userRestService: UserRestService) {
+  constructor(private userRestService: UserRestService, private router: Router) {
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
           this.role = response.headers.get('Role');
           this.userRestService.setToken(userCredentials.email, this.role, this.token);
           this.loginStatusCode = response.status;
+          this.router.navigate(['home']);
         },
         (error) => {
           this.loginStatusCode = error.status;
@@ -52,7 +54,7 @@ export class LoginComponent implements OnInit {
   }
 
   // This is only to validate token verification
-  sendToken(){
+  sendToken() {
     this.userRestService.validToken(this.email.value, this.token).subscribe(
       (res) => {
         console.log(res);
