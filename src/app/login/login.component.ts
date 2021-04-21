@@ -10,7 +10,7 @@ import {AES} from 'crypto-js';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private connection: UserRestService) {
+  constructor(private userRestService: UserRestService) {
   }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -35,11 +35,11 @@ export class LoginComponent implements OnInit {
         email: this.email.value,
         password: AES.encrypt(this.password.value, 'password').toString()
       };
-      this.connection.loginUser(userCredentials).subscribe(
+      this.userRestService.loginUser(userCredentials).subscribe(
         response => {
           this.token = response.headers.get('Authorization');
           this.role = response.headers.get('Role');
-          this.connection.setToken(userCredentials.email, this.role, this.token);
+          this.userRestService.setToken(userCredentials.email, this.role, this.token);
           this.loginStatusCode = response.status;
         },
         (error) => {
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
 
   // This is only to validate token verification
   sendToken(){
-    this.connection.validToken(this.email.value, this.token).subscribe(
+    this.userRestService.validToken(this.email.value, this.token).subscribe(
       (res) => {
         console.log(res);
       }

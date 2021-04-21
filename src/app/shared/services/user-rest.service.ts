@@ -15,8 +15,12 @@ export class UserRestService {
 
   loginUser(userCredentials: object) {
     let url = this.BASE_URL + this.USERS + this.LOGIN;
-    console.log(url);
+    //console.log(url);
     return this.http.post(url, userCredentials, {observe: 'response'});
+  }
+
+  logoutUser(): void {
+    this.deleteToken();
   }
 
   setToken(email: string, role: string, token: string) {
@@ -24,8 +28,12 @@ export class UserRestService {
     sessionStorage.setItem('token', String(tokenInfo));
   }
 
-  getToken(): string | null  {
+  getToken(): string | null {
     return sessionStorage.getItem('token');
+  }
+
+  deleteToken() {
+    sessionStorage.removeItem('token');
   }
 
   isAuthenticated(): boolean {
