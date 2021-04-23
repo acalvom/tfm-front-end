@@ -1,1 +1,62 @@
-<p>register works!</p>
+<mat-card>
+  <mat-card-title>Register</mat-card-title>
+  <mat-card-content [formGroup]="userFormGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput id="name" name="name" formControlName="name" required>
+      <mat-error *ngIf="userFormGroup.get('name').invalid"> {{getErrorMessage('name')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Surname</mat-label>
+      <input matInput id="surname" name="surname" formControlName="surname" required>
+      <mat-error *ngIf="userFormGroup.get('surname').invalid"> {{getErrorMessage('surname')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>DNI</mat-label>
+      <input matInput placeholder="00000000T" id="dni" name="dni" formControlName="dni" required>
+      <mat-error *ngIf="userFormGroup.get('dni').invalid"> {{getErrorMessage('dni')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <mat-select id="gender" formControlName="gender" required>
+        <mat-option value="man">Man</mat-option>
+        <mat-option value="woman">Woman</mat-option>
+      </mat-select>
+      <mat-error *ngIf="userFormGroup.get('gender').invalid"> You must choose an option</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select id="role" formControlName="role" required>
+        <mat-option value="admin">Admin</mat-option>
+        <mat-option value="teacher">Teacher</mat-option>
+        <mat-option value="student">Student</mat-option>
+      </mat-select>
+      <mat-error *ngIf="userFormGroup.get('role').invalid"> You must choose an option</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="user@example.com" id="email" name="email" formControlName="email" required>
+      <mat-error *ngIf="userFormGroup.get('email').invalid"> {{getErrorMessage('email')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" formControlName="password" required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="userFormGroup.get('password').invalid"> {{getErrorMessage('password')}}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary"
+            (click)='registerUser()' [formGroup]="userFormGroup" [disabled]="userFormGroup.invalid">Register
+    </button>
+
+  </mat-card-content>
+</mat-card>
