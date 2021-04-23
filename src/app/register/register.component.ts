@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../shared/models/user.model';
+import {AuthService} from '../shared/services/auth.service';
+import {AES} from 'crypto-js';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,10 +12,13 @@ import {User} from '../shared/models/user.model';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   dniPattern = '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
+  hide = true;
+  registerStatusCode;
+
   userFormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('', [Validators.required]),
@@ -22,9 +28,6 @@ export class RegisterComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
-
-  hide = true;
-  user = new User;
 
   getErrorMessage(field: string) {
     if (this.userFormGroup.get(field).hasError('required')) {
@@ -44,16 +47,34 @@ export class RegisterComponent implements OnInit {
     return this.userFormGroup.valid;
   }
 
+  createNewUser(): User {
+    let user = new User;
+    user.name = this.userFormGroup.get('name').value;
+    user.surname = this.userFormGroup.get('surname').value;
+    user.dni = this.userFormGroup.get('dni').value.toUpperCase();
+    user.gender = this.userFormGroup.get('gender').value;
+    user.email = this.userFormGroup.get('email').value;
+    let password = this.userFormGroup.get('password').value;
+    user.password = AES.encrypt(password, 'password').toString();
+    user.penalties = 0;
+    user.role = this.userFormGroup.get('role').value;
+    return user;
+  }
+
   registerUser(): void {
-    if (!this.isValidForm()) {
-      this.user.name = this.userFormGroup.get('name').value;
-      this.user.surname = this.userFormGroup.get('surname').value;
-      this.user.dni = this.userFormGroup.get('dni').value.toUpperCase();
-      this.user.gender = this.userFormGroup.get('gender').value;
-      this.user.email = this.userFormGroup.get('email').value;
-      this.user.password = this.userFormGroup.get('password').value;
-      this.user.penalties = 0;
-      this.user.role = this.userFormGroup.get('role').value;
+    if (this.isValidForm()) {
+      let newUser = this.createNewUser();
+      console.log(JSON.stringify(newUser));
+      this.authService.registerUser(newUser).subscribe(
+        response => {
+          console.log(response.body);
+          this.registerStatusCode = response.status;
+          this.router.navigate(['login']).then();
+        },
+        (error) => {
+          this.registerStatusCode = error.status;
+        }
+      );
     }
   }
 

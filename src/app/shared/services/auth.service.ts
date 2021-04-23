@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class AuthService {
   private BASE_URL = 'http://localhost:8000';
   private USERS = '/users';
   private LOGIN = '/login';
+  private REGISTER = '/register';
 
   constructor(private http: HttpClient) {
   }
@@ -20,6 +22,11 @@ export class AuthService {
 
   logoutUser(): void {
     this.deleteToken();
+  }
+
+  registerUser(user: User) {
+    let url = this.BASE_URL + this.USERS + this.REGISTER;
+    return this.http.post(url, user, {observe: 'response'});
   }
 
   setToken(email: string, role: string, token: string) {
