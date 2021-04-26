@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class AuthService {
   private BASE_URL = 'http://localhost:8000';
   private USERS = '/users';
   private LOGIN = '/login';
+  private REGISTER = '/register';
 
   constructor(private http: HttpClient) {
   }
@@ -20,6 +22,14 @@ export class AuthService {
 
   logoutUser(): void {
     this.deleteToken();
+  }
+
+  registerUser(user: User) {
+    const token = this.getToken().split(',')[2];
+    const role = this.getToken().split(',')[1];
+    const headers = new HttpHeaders().set('Authorization', token).set('Role', role);
+    let url = this.BASE_URL + this.USERS + this.REGISTER;
+    return this.http.post(url, user, {headers, observe: 'response'});
   }
 
   setToken(email: string, role: string, token: string) {
