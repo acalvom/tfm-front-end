@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
 
   dniPattern = '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
   hide = true;
+  token;
+  role;
   registerStatusCode;
 
   userFormGroup = new FormGroup({
