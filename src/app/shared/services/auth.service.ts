@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../models/user.model';
 
 @Injectable({
@@ -25,8 +25,11 @@ export class AuthService {
   }
 
   registerUser(user: User) {
+    const token = this.getToken().split(',')[2];
+    const role = this.getToken().split(',')[1];
+    const headers = new HttpHeaders().set('Authorization', token).set('Role', role);
     let url = this.BASE_URL + this.USERS + this.REGISTER;
-    return this.http.post(url, user, {observe: 'response'});
+    return this.http.post(url, user, {headers, observe: 'response'});
   }
 
   setToken(email: string, role: string, token: string) {
