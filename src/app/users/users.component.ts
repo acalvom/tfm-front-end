@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../shared/models/user.model';
+import {UsersService} from '../shared/services/users.service';
 
 @Component({
   selector: 'app-users',
@@ -8,22 +9,32 @@ import {User} from '../shared/models/user.model';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() {
+  constructor(private userService: UsersService) {
   }
 
-  users: User[] = [];
+  students: User[] = [];
+  teachers: User[] = [];
   columns: string[] = ['name', 'email', 'dni', 'role'];
-  dataSource = this.getStudents();
+  getStudentsStatusCode;
 
   getStudents() {
-    this.users = [
-      {name: 'a', surname: 'aa', dni: '1234A', gender: 'man', email: 'a@a', password: 'a', penalties: 0, role: 'teacher'},
-      {name: 'b', surname: 'bb', dni: '1234B', gender: 'woman', email: 'b@b', password: 'b', penalties: 2, role: 'student'}
-    ];
-    return this.users;
+    this.userService.getStudents().subscribe(
+      (value: User[]) => {
+        this.students = value;
+      });
   }
 
+  getTeachers() {
+    this.userService.getTeachers().subscribe(
+      (value: User[]) => {
+        this.teachers = value;
+      });
+  }
+
+
   ngOnInit(): void {
+    this.getStudents();
+    this.getTeachers();
   }
 
 }
