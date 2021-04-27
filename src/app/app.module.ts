@@ -12,6 +12,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 
 import {AuthService} from './shared/services/auth.service';
+import {UsersComponent} from './users/users.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {AuthService} from './shared/services/auth.service';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UsersComponent
   ],
   imports: [
     AngularMaterialModule,
