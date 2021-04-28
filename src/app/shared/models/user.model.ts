@@ -10,4 +10,14 @@ export class User {
   role: string;
   token?: string;
   salt?: string;
+
+  copyProperties(item) {
+    this.name = item.name;
+    this.surname = item.surname;
+    this.dni = item.dni;
+    this.gender = item.gender;
+    this.email = item.email;
+    this.penalties = item.penalties;
+    this.role = item.role;
+  }
 }
