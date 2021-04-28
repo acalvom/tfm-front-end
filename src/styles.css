@@ -1,9 +1,12 @@
 @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
 
-body {
+body, html {
   font-family: Roboto, Arial, sans-serif;
   margin: 0;
-  padding: 30px;
+  padding: 10px;
+  overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .version-info {
