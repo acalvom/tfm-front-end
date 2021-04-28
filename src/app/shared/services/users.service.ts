@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,20 @@ export class UsersService {
   private TEACHERS = '/users/teachers';
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
   getStudents() {
-    return this.http.get(this.BASE_URL + this.STUDENTS);
+    const token = this.authService.getToken().split(',')[2];
+    const role = this.authService.getToken().split(',')[1];
+    const headers = new HttpHeaders().set('Authorization', token).set('Role', role);
+    return this.http.get(this.BASE_URL + this.STUDENTS, {headers, observe: 'response'});
   }
 
   getTeachers() {
-    return this.http.get(this.BASE_URL + this.TEACHERS);
+    const token = this.authService.getToken().split(',')[2];
+    const role = this.authService.getToken().split(',')[1];
+    const headers = new HttpHeaders().set('Authorization', token).set('Role', role);
+    return this.http.get(this.BASE_URL + this.TEACHERS, {headers, observe: 'response'});
   }
 }

@@ -12,22 +12,23 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UsersService) {
   }
 
-  students: User[] = [];
-  teachers: User[] = [];
-  columns: string[] = ['name', 'email', 'dni', 'role'];
+  students: any[];
+  teachers: any[] = [];
+  columns: string[] = ['name','surname','gender','email', 'dni', 'penalties'];
   getStudentsStatusCode;
+
 
   getStudents() {
     this.userService.getStudents().subscribe(
-      (value: User[]) => {
-        this.students = value;
+      (value: any) => {
+        this.students = value.body;
       });
   }
 
   getTeachers() {
     this.userService.getTeachers().subscribe(
-      (value: User[]) => {
-        this.teachers = value;
+      (value:any) => {
+        this.teachers = value.body;
       });
   }
 
