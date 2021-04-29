@@ -46,7 +46,8 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" formControlName="password" required>
+      <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" formControlName="password"
+             required>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -56,6 +57,10 @@
 
     <button mat-raised-button color="primary"
             (click)='registerUser()' [formGroup]="userFormGroup" [disabled]="userFormGroup.invalid">Register
+    </button>
+
+    <button mat-raised-button color="primary"
+            (click)='clearForm()' [formGroup]="userFormGroup">Clear
     </button>
 
   </mat-card-content>

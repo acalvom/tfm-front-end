@@ -1,40 +1,47 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../shared/services/auth.service';
 import {AES} from 'crypto-js';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
   }
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
   hide = true;
   token;
   role;
   loginStatusCode;
 
-  getErrorMessage() {
-    if (this.email.hasError('required') || (this.password.hasError('required'))) {
+
+  loginFormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  });
+
+  getErrorMessage(field: string) {
+    if (this.loginFormGroup.get(field).hasError('required')) {
       return 'You must enter a value';
     }
-    let emailErrorMessage = this.email.hasError('email') ? 'Not a valid email' : '';
-    let passwordErrorMessage = this.password.hasError('required') ? 'Password required' : '';
-    return (emailErrorMessage || passwordErrorMessage);
+    if (this.loginFormGroup.get('email').hasError('email')) {
+      return 'Not a valid email';
+    } else {
+      return '';
+    }
   }
 
   loginUser(): void {
-    if (!this.getErrorMessage()) {
+    if (this.loginFormGroup.valid) {
       const userCredentials = {
-        email: this.email.value,
-        password: AES.encrypt(this.password.value, 'password').toString()
+        email: this.loginFormGroup.get('email').value,
+        password: AES.encrypt(this.loginFormGroup.get('password').value, 'password').toString()
       };
       this.authService.loginUser(userCredentials).subscribe(
         response => {
@@ -46,26 +53,15 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           this.loginStatusCode = error.status;
-        }
-      );
-      // console.log('User: ' + userCredentials.email + ' Role: ' + this.role);
-      // console.log('Token: ' + this.token + ' Login Status: ' + this.loginStatusCode);
+          this.openSnackBar('Wrong email or password', 'OK');
+        });
     }
   }
 
-  // This is only to validate token verification
-  // sendToken() {
-  //   this.authService.validToken(this.email.value, this.token).subscribe(
-  //     (res) => {
-  //       console.log(res);
-  //     }
-  //   );
-  //   // console.log('is admin: ' + this.connection.isAdmin());
-  //   // console.log('is teacher: ' + this.connection.isTeacher());
-  //   // console.log('is student: ' + this.connection.isStudent());
-  // }
-
-  ngOnInit(): void {
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
   }
-
 }
+
