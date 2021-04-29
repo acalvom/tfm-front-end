@@ -1,26 +1,25 @@
 <mat-card>
   <mat-card-title>Login</mat-card-title>
-  <mat-card-content>
+  <mat-card-content [formGroup]="loginFormGroup">
     <mat-form-field appearance="fill">
       <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="user@example.com" id="email" name="email" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      <input matInput placeholder="user@example.com" id="email" name="email" formControlName="email" required>
+      <mat-error *ngIf="loginFormGroup.get('email').invalid"> {{getErrorMessage('email')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" [formControl]="password">
+      <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" formControlName="password"
+             required>
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+      <mat-error *ngIf="loginFormGroup.get('password').invalid"> {{getErrorMessage('password')}}</mat-error>
     </mat-form-field>
+
     <button mat-raised-button color="primary"
-            (click)='loginUser()'>Login
+            (click)='loginUser()' [formGroup]="loginFormGroup" [disabled]="loginFormGroup.invalid">Login
     </button>
-    <!--    &lt;!&ndash;    This is only to validate token verification  &ndash;&gt;-->
-    <!--    <button mat-raised-button color="primary"-->
-    <!--            (click)='sendToken()'>Send token-->
-    <!--    </button>-->
   </mat-card-content>
 </mat-card>

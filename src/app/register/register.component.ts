@@ -1,18 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../shared/models/user.model';
 import {AuthService} from '../shared/services/auth.service';
 import {AES} from 'crypto-js';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
   }
 
   dniPattern = '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
@@ -31,22 +32,20 @@ export class RegisterComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  getErrorMessage(field: string) {
-    if (this.userFormGroup.get(field).hasError('required')) {
-      return 'You must enter a value';
+  registerUser(): void {
+    if (this.isValidForm()) {
+      let newUser = this.createNewUser();
+      this.authService.registerUser(newUser).subscribe(
+        response => {
+          this.registerStatusCode = response.status;
+          this.openSnackBar('User successfully registered', 'OK');
+          this.clearForm();
+        },
+        (error) => {
+          this.registerStatusCode = error.status;
+          this.openSnackBar(newUser.email + ' ' + error.error, 'OK');
+        });
     }
-    if (this.userFormGroup.get('email').hasError('email')) {
-      return 'Not a valid email';
-    }
-    if (this.userFormGroup.get('dni').hasError('pattern')) {
-      return 'Incorrect DNI';
-    } else {
-      return '';
-    }
-  }
-
-  isValidForm() {
-    return this.userFormGroup.valid;
   }
 
   createNewUser(): User {
@@ -56,31 +55,37 @@ export class RegisterComponent implements OnInit {
     user.dni = this.userFormGroup.get('dni').value.toUpperCase();
     user.gender = this.userFormGroup.get('gender').value;
     user.email = this.userFormGroup.get('email').value;
-    let password = this.userFormGroup.get('password').value;
-    user.password = AES.encrypt(password, 'password').toString();
-    user.penalties = 0;
+    user.password = AES.encrypt(this.userFormGroup.get('password').value, 'password').toString();
     user.role = this.userFormGroup.get('role').value;
+    user.role === 'student' ? user.penalties = 0 : user.penalties = null;
     return user;
   }
 
-  registerUser(): void {
-    if (this.isValidForm()) {
-      let newUser = this.createNewUser();
-      console.log(JSON.stringify(newUser));
-      this.authService.registerUser(newUser).subscribe(
-        response => {
-          console.log(response.body);
-          this.registerStatusCode = response.status;
-          this.router.navigate(['login']).then();
-        },
-        (error) => {
-          this.registerStatusCode = error.status;
-        }
-      );
+  getErrorMessage(field: string) {
+    if (this.userFormGroup.get(field).hasError('required')) {
+      return 'You must enter a value';
+    }
+    if (this.userFormGroup.get('email').hasError('email')) {
+      return 'Not a valid email';
+    }
+    if (this.userFormGroup.get('dni').hasError('pattern')) {
+      return 'Incorrect DNI. WARN: Letter must be CAPS';
+    } else {
+      return '';
     }
   }
 
-  ngOnInit(): void {
+  isValidForm() {
+    return this.userFormGroup.valid;
   }
 
+  clearForm(): void {
+    this.userFormGroup.reset();
+  }
+
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
 }
