@@ -3,6 +3,7 @@ import {UsersService} from '../shared/services/users.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {User} from '../shared/models/user.model';
 import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-users',
@@ -16,6 +17,7 @@ export class UsersComponent implements OnInit {
   dataSource = new MatTableDataSource<User>();
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private userService: UsersService) {
   }
@@ -27,6 +29,10 @@ export class UsersComponent implements OnInit {
   applyFilter(event: Event, dataSource: MatTableDataSource<User>) {
     const filter = (event.target as HTMLInputElement).value;
     dataSource.filter = filter.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   getUsers() {
@@ -35,6 +41,7 @@ export class UsersComponent implements OnInit {
         this.generateUserFromArray(response.body);
         this.dataSource.data = this.users as User[];
         this.dataSource.sort = this.sort as MatSort;
+        this.dataSource.paginator = this.paginator;
       });
   }
 
