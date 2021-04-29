@@ -4,7 +4,7 @@
 </mat-form-field>
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
-
+    <caption>Academy users list</caption>
     <ng-container matColumnDef="role">
       <th id="role" mat-header-cell *matHeaderCellDef mat-sort-header> Role</th>
       <td mat-cell *matCellDef="let element"> {{element.role}} </td>
