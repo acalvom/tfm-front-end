@@ -2,15 +2,8 @@
 
 body, html {
   font-family: Roboto, Arial, sans-serif;
+  background-color: darkslategrey;
   margin: 0;
-  padding: 10px;
-  overflow: hidden;
+  padding: 1px;
   height: 100%;
-  box-sizing: border-box;
-}
-
-.version-info {
-  font-size: 8pt;
-  float: right;
-  margin: 8px;
 }
