@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {User} from '../shared/models/user.model';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -19,11 +20,15 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private userService: UsersService) {
+  constructor(private userService: UsersService, private authService: AuthService) {
   }
 
   ngOnInit() {
-    this.getUsers();
+    if (this.authService.isAdmin()) {
+      this.getUsers();
+    } else if (this.authService.isTeacher()) {
+      this.getStudents();
+    }
   }
 
   applyFilter(event: Event, dataSource: MatTableDataSource<User>) {
@@ -39,9 +44,15 @@ export class UsersComponent implements OnInit {
     this.userService.getUsers().subscribe(
       (response: any) => {
         this.generateUserFromArray(response.body);
-        this.dataSource.data = this.users as User[];
-        this.dataSource.sort = this.sort as MatSort;
-        this.dataSource.paginator = this.paginator;
+        this.setTableTools();
+      });
+  }
+
+  getStudents() {
+    this.userService.getStudents().subscribe(
+      (response: any) => {
+        this.generateUserFromArray(response.body);
+        this.setTableTools();
       });
   }
 
@@ -52,6 +63,12 @@ export class UsersComponent implements OnInit {
       user.copyProperties(anyArray[key]);
       this.users.push(user);
     }
+  }
+
+  setTableTools() {
+    this.dataSource.data = this.users as User[];
+    this.dataSource.sort = this.sort as MatSort;
+    this.dataSource.paginator = this.paginator;
   }
 }
 
