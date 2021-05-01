@@ -15,6 +15,7 @@ import {AuthService} from './shared/services/auth.service';
 import {UsersComponent} from './users/users.component';
 import {AdminComponent} from './users/admin.component';
 import {TeacherComponent} from './users/teacher.component';
+import {YesNoDialogComponent} from './shared/components/yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {TeacherComponent} from './users/teacher.component';
     RegisterComponent,
     UsersComponent,
     AdminComponent,
-    TeacherComponent
+    TeacherComponent,
+    YesNoDialogComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -38,7 +40,10 @@ import {TeacherComponent} from './users/teacher.component';
   providers: [
     AuthService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    YesNoDialogComponent
+  ]
 })
 export class AppModule {
 }

@@ -4,6 +4,8 @@ import {UsersService} from '../shared/services/users.service';
 import {AuthService} from '../shared/services/auth.service';
 import {User} from '../shared/models/user.model';
 import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-dialog.component';
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +14,7 @@ import {Router} from '@angular/router';
 })
 export class AdminComponent extends UsersComponent implements OnInit {
 
-  constructor(protected userService: UsersService, public authService: AuthService, protected router: Router) {
+  constructor(protected userService: UsersService, public authService: AuthService, protected router: Router, public dialog: MatDialog) {
     super(userService, authService, router);
     this.columns = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role', 'action'];
   }
@@ -30,8 +32,19 @@ export class AdminComponent extends UsersComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    this.userService.deleteUser(user.email).subscribe(data => {
-      console.log(data);
-    });
+    let data = 'Do you really want to delete user ' + user.email + ' ?';
+    this.dialog.open(YesNoDialogComponent, {data: data})
+      .afterClosed().subscribe(
+      (remove: Boolean) => {
+        if (remove) {
+          this.userService.deleteUser(user.email).subscribe(
+            data => {
+              console.log(data);
+            },
+            (error) => {
+              console.log(error.status);
+            });
+        }
+      });
   }
 }
