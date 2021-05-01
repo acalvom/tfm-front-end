@@ -6,6 +6,7 @@ import {User} from '../shared/models/user.model';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +15,13 @@ import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-di
 })
 export class AdminComponent extends UsersComponent implements OnInit {
 
-  constructor(protected userService: UsersService, public authService: AuthService, protected router: Router, public dialog: MatDialog) {
+  constructor(
+    protected userService: UsersService,
+    public authService: AuthService,
+    protected router: Router,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
     super(userService, authService, router);
     this.columns = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role', 'action'];
   }
@@ -38,13 +45,22 @@ export class AdminComponent extends UsersComponent implements OnInit {
       (remove: Boolean) => {
         if (remove) {
           this.userService.deleteUser(user.email).subscribe(
-            data => {
-              console.log(data);
+            () => {
+              this.openSnackBar('User successfully deleted', 'OK');
+              this.refreshPage();
             },
             (error) => {
-              console.log(error.status);
+              this.openSnackBar('User cannot be deleted: Error ' + error.status, 'OK');
             });
         }
       });
+  }
+
+  refreshPage() {
+    window.location.reload();
+  }
+
+  openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {duration: 5000});
   }
 }
