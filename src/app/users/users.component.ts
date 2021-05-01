@@ -13,7 +13,7 @@ import {AuthService} from '../shared/services/auth.service';
 })
 export class UsersComponent implements OnInit {
 
-  columns: string[] = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role'];
+  columns: string[] = [];
   users: User[] = [];
   dataSource = new MatTableDataSource<User>();
 
@@ -25,8 +25,10 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isAdmin()) {
+      this.columns = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role', 'action'];
       this.getUsers();
     } else if (this.authService.isTeacher()) {
+      this.columns = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role'];
       this.getStudents();
     }
   }
@@ -54,6 +56,10 @@ export class UsersComponent implements OnInit {
         this.generateUserFromArray(response.body);
         this.setTableTools();
       });
+  }
+
+  deleteContact(user: User) {
+    console.log(JSON.stringify(user));
   }
 
   generateUserFromArray(anyArray: any) {
