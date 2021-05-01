@@ -29,7 +29,9 @@ export class AdminComponent extends UsersComponent implements OnInit {
       });
   }
 
-  deleteContact(user: User) {
-    console.log(JSON.stringify(user));
+  deleteUser(user: User) {
+    this.userService.deleteUser(user.email).subscribe(data => {
+      console.log(data);
+    });
   }
 }

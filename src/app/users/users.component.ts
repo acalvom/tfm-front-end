@@ -56,7 +56,7 @@ export class UsersComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  deleteContact(user: User) {
+  deleteUser(user: User) {
     //empty for injection
   }
 }
