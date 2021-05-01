@@ -38,12 +38,12 @@ export class RegisterComponent {
       this.authService.registerUser(newUser).subscribe(
         response => {
           this.registerStatusCode = response.status;
-          this.openSnackBar('User successfully registered', 'OK');
+          this.snackBar.open('User successfully registered', 'OK', {duration: 5000});
           this.clearForm();
         },
         (error) => {
           this.registerStatusCode = error.status;
-          this.openSnackBar(newUser.email + ' ' + error.error, 'OK');
+          this.snackBar.open(newUser.email + ' ' + error.error, 'OK', {duration: 5000});
         });
     }
   }
@@ -81,11 +81,5 @@ export class RegisterComponent {
 
   clearForm(): void {
     this.userFormGroup.reset();
-  }
-
-  openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
-      duration: 5000,
-    });
   }
 }

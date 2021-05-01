@@ -53,15 +53,9 @@ export class LoginComponent {
         },
         (error) => {
           this.loginStatusCode = error.status;
-          this.openSnackBar('Wrong email or password', 'OK');
+          this.snackBar.open('Wrong email or password', 'OK', {duration: 5000});
         });
     }
-  }
-
-  openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
-      duration: 5000,
-    });
   }
 }
 
