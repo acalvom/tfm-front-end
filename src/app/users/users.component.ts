@@ -5,6 +5,7 @@ import {User} from '../shared/models/user.model';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {AuthService} from '../shared/services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -20,16 +21,14 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private userService: UsersService, private authService: AuthService) {
+  constructor(protected userService: UsersService, public authService: AuthService, protected router: Router) {
   }
 
   ngOnInit() {
     if (this.authService.isAdmin()) {
-      this.columns = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role', 'action'];
-      this.getUsers();
+      this.router.navigate(['/users/admin']).then();
     } else if (this.authService.isTeacher()) {
-      this.columns = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role'];
-      this.getStudents();
+      this.router.navigate(['/users/teacher']).then();
     }
   }
 
@@ -40,26 +39,6 @@ export class UsersComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  getUsers() {
-    this.userService.getUsers().subscribe(
-      (response: any) => {
-        this.generateUserFromArray(response.body);
-        this.setTableTools();
-      });
-  }
-
-  getStudents() {
-    this.userService.getStudents().subscribe(
-      (response: any) => {
-        this.generateUserFromArray(response.body);
-        this.setTableTools();
-      });
-  }
-
-  deleteContact(user: User) {
-    console.log(JSON.stringify(user));
   }
 
   generateUserFromArray(anyArray: any) {
@@ -75,6 +54,10 @@ export class UsersComponent implements OnInit {
     this.dataSource.data = this.users as User[];
     this.dataSource.sort = this.sort as MatSort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  deleteContact(user: User) {
+    //empty for injection
   }
 }
 
