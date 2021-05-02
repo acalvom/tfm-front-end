@@ -1,0 +1,11 @@
+.menu-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+mat-form-field {
+  display: block;
+}
+
+button {
+  margin-right: 10px;
+}

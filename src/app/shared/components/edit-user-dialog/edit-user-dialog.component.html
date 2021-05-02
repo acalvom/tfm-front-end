@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Edit User</h2>
+
+<mat-dialog-content [formGroup]="editUserFormGroup">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput id="name" name="name" formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Surname</mat-label>
+    <input matInput id="surname" name="surname" formControlName="surname">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>DNI</mat-label>
+    <input matInput placeholder="00000000T" id="dni" name="dni" formControlName="dni">
+    <mat-error *ngIf="editUserFormGroup.get('dni').invalid"> {{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Gender</mat-label>
+    <mat-select id="gender" formControlName="gender">
+      <mat-option value="man">Man</mat-option>
+      <mat-option value="woman">Woman</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="user@example.com" id="email" name="email" formControlName="email">
+    <mat-error *ngIf="editUserFormGroup.get('email').invalid"> {{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="update()">Update</button>
+</mat-dialog-actions>
