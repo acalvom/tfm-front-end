@@ -59,5 +59,9 @@ export class UsersComponent implements OnInit {
   deleteUser(user: User) {
     //empty for injection
   }
+
+  editUser(user: User) {
+    //empty for injection
+  }
 }
 

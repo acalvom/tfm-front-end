@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {EditUserDialogComponent} from '../shared/components/edit-user-dialog/edit-user-dialog.component';
 
 @Component({
   selector: 'app-admin',
@@ -51,5 +52,11 @@ export class AdminComponent extends UsersComponent implements OnInit {
           });
         }
       });
+  }
+
+  editUser(user: User) {
+    let data = 'Edit User';
+    this.dialog.open(EditUserDialogComponent, {data: data}).afterClosed().subscribe(
+      () => console.log('hola'));
   }
 }
