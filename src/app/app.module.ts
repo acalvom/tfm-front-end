@@ -13,6 +13,9 @@ import {RegisterComponent} from './register/register.component';
 
 import {AuthService} from './shared/services/auth.service';
 import {UsersComponent} from './users/users.component';
+import {AdminComponent} from './users/admin.component';
+import {TeacherComponent} from './users/teacher.component';
+import {YesNoDialogComponent} from './shared/components/yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import {UsersComponent} from './users/users.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    UsersComponent
+    UsersComponent,
+    AdminComponent,
+    TeacherComponent,
+    YesNoDialogComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -34,7 +40,10 @@ import {UsersComponent} from './users/users.component';
   providers: [
     AuthService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    YesNoDialogComponent
+  ]
 })
 export class AppModule {
 }

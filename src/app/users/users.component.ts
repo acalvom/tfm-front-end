@@ -5,6 +5,7 @@ import {User} from '../shared/models/user.model';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {AuthService} from '../shared/services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -13,21 +14,21 @@ import {AuthService} from '../shared/services/auth.service';
 })
 export class UsersComponent implements OnInit {
 
-  columns: string[] = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role'];
+  columns: string[] = [];
   users: User[] = [];
   dataSource = new MatTableDataSource<User>();
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private userService: UsersService, private authService: AuthService) {
+  constructor(protected userService: UsersService, public authService: AuthService, protected router: Router) {
   }
 
   ngOnInit() {
     if (this.authService.isAdmin()) {
-      this.getUsers();
+      this.router.navigate(['/users/admin']).then();
     } else if (this.authService.isTeacher()) {
-      this.getStudents();
+      this.router.navigate(['/users/teacher']).then();
     }
   }
 
@@ -38,22 +39,6 @@ export class UsersComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  getUsers() {
-    this.userService.getUsers().subscribe(
-      (response: any) => {
-        this.generateUserFromArray(response.body);
-        this.setTableTools();
-      });
-  }
-
-  getStudents() {
-    this.userService.getStudents().subscribe(
-      (response: any) => {
-        this.generateUserFromArray(response.body);
-        this.setTableTools();
-      });
   }
 
   generateUserFromArray(anyArray: any) {
@@ -69,6 +54,10 @@ export class UsersComponent implements OnInit {
     this.dataSource.data = this.users as User[];
     this.dataSource.sort = this.sort as MatSort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  deleteUser(user: User) {
+    //empty for injection
   }
 }
 
