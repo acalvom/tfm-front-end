@@ -25,9 +25,7 @@ export class AuthService {
   }
 
   registerUser(user: User) {
-    const token = this.getToken().split(',')[2];
-    const role = this.getToken().split(',')[1];
-    const headers = new HttpHeaders().set('Authorization', token).set('Role', role);
+    const headers = this.getHeaders();
     let url = this.BASE_URL + this.USERS + this.REGISTER;
     return this.http.post(url, user, {headers, observe: 'response'});
   }
@@ -43,6 +41,12 @@ export class AuthService {
 
   deleteToken() {
     sessionStorage.removeItem('token');
+  }
+
+  getHeaders() {
+    const token = this.getToken().split(',')[2];
+    const role = this.getToken().split(',')[1];
+    return new HttpHeaders().set('Authorization', token).set('Role', role);
   }
 
   isAuthenticated(): boolean {
@@ -61,9 +65,5 @@ export class AuthService {
     return (this.isAuthenticated()) && (this.getToken().split(',')[1] == 'student');
   }
 
-  // // This is only to validate token verification
-  // validToken(email: string, token: string) {
-  //   const headers = new HttpHeaders().set('Authorization', token);
-  //   return this.http.get(this.BASE_URL + '/users/valToken/' + email, {headers});
-  // }
+
 }
