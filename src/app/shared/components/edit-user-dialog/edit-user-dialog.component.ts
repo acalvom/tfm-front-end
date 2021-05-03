@@ -13,7 +13,7 @@ export class EditUserDialogComponent implements OnInit {
   dniPattern = '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
 
   constructor(public dialog: MatDialogRef<EditUserDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public userEdited: User) {
+              @Inject(MAT_DIALOG_DATA) public data: User) {
   }
 
   ngOnInit(): void {
@@ -44,7 +44,24 @@ export class EditUserDialogComponent implements OnInit {
   }
 
   update() {
-    this.dialog.close(this.editUserFormGroup.value);
+    let user = new User();
+    user.copyProperties(this.editUserFormGroup.value);
+    if (user.name === '') {
+      user.name = this.data.name;
+    }
+    if (user.surname === '') {
+      user.surname = this.data.surname;
+    }
+    if (user.dni === '') {
+      user.dni = this.data.dni;
+    }
+    if (user.gender === '') {
+      user.gender = this.data.gender;
+    }
+    if (user.email === '') {
+      user.email = this.data.email;
+    }
+    this.dialog.close(user);
   }
 
   close() {
