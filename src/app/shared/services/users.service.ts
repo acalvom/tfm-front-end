@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from './auth.service';
+import {User} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,13 @@ export class UsersService {
     const headers = new HttpHeaders().set('Authorization', token).set('Role', role);
     const url = this.BASE_URL + this.USERS + '/' + userEmail;
     return this.http.delete(url, {headers, observe: 'response'});
+  }
+
+  editUser(userEmail: string, editedUser: User) {
+    const token = this.authService.getToken().split(',')[2];
+    const role = this.authService.getToken().split(',')[1];
+    const headers = new HttpHeaders().set('Authorization', token).set('Role', role);
+    const url = this.BASE_URL + this.USERS + '/' + userEmail;
+    return this.http.put(url, editedUser, {headers, observe: 'response'});
   }
 }

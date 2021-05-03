@@ -55,8 +55,16 @@ export class AdminComponent extends UsersComponent implements OnInit {
   }
 
   editUser(user: User) {
-    let data = 'Edit User';
-    this.dialog.open(EditUserDialogComponent, {data: data}).afterClosed().subscribe(
-      () => console.log('hola'));
+    this.dialog.open(EditUserDialogComponent, {data: user}).afterClosed().subscribe(
+      (editedUser: User) => {
+        if (editedUser) {
+          this.userService.editUser(user.email, editedUser).subscribe(() => {
+            this.snackBar.open('User successfully edited', 'OK', {duration: 5000});
+            this.getUsers();
+          }, (error) => {
+            this.snackBar.open('User cannot be edited: Error ' + error.status, 'OK', {duration: 5000});
+          });
+        }
+      });
   }
 }
