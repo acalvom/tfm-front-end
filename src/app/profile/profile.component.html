@@ -1,1 +1,63 @@
-<p>profile works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img class="img-fluid" src="../../assets/images/running.jpg" alt="Running">
+    </div>
+    <div class="col">
+      <mat-card>
+        <mat-card-content [formGroup]="userFormGroup">
+          <mat-form-field class="example-full-width">
+            <mat-label>My name is:</mat-label>
+            <input matInput id="name" readonly>{{aText}}
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>My surname is:</mat-label>
+            <input matInput id="surname" readonly>{{aText}}
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width">
+            <mat-label>My DNI is:</mat-label>
+            <input matInput id="dni" readonly> {{aText}}
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>My contact phone is:</mat-label>
+            <input matInput id="phone" readonly> {{aText}}
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>I am a:</mat-label>
+            <input matInput id="gender" readonly> {{aText}}
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>I am a:</mat-label>
+            <input matInput id="role" readonly> {{aText}}
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>My penalties number is:</mat-label>
+            <input matInput id="penalties" readonly> {{aText}}
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>My email is:</mat-label>
+            <input matInput id="email" readonly> {{aText}}
+          </mat-form-field>
+
+<!--          <button mat-raised-button color="primary"-->
+<!--                  (click)='changePassword()' [formGroup]="userFormGroup" [disabled]="userFormGroup.invalid">Change-->
+<!--            Password-->
+<!--          </button>-->
+
+<!--          <button mat-raised-button color="primary"-->
+<!--                  (click)='changePhone()' [formGroup]="userFormGroup">Change Phone-->
+<!--          </button>-->
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
