@@ -41,10 +41,13 @@
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th id="deleteUser" mat-header-cell *matHeaderCellDef></th>
+      <th id="action" mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button color="warn" (click)="deleteUser(element)" title="Delete User">
           <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="editUser(element)" title="Edit User">
+          <mat-icon>edit</mat-icon>
         </button>
       </td>
     </ng-container>
