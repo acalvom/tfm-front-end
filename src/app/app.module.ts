@@ -17,6 +17,7 @@ import {AdminComponent} from './users/admin.component';
 import {TeacherComponent} from './users/teacher.component';
 import {YesNoDialogComponent} from './shared/components/yes-no-dialog/yes-no-dialog.component';
 import {EditUserDialogComponent} from './shared/components/edit-user-dialog/edit-user-dialog.component';
+import {ProfileComponent} from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {EditUserDialogComponent} from './shared/components/edit-user-dialog/edit
     AdminComponent,
     TeacherComponent,
     YesNoDialogComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    ProfileComponent
   ],
   imports: [
     AngularMaterialModule,
