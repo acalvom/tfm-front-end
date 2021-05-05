@@ -1,60 +1,60 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <img class="img-fluid" src="../../assets/images/running.jpg" alt="Running">
+      <img class="img-fluid" src="../../assets/images/back.jpg" alt="Running">
     </div>
     <div class="col">
       <mat-card>
-        <mat-card-content [formGroup]="userFormGroup">
+        <mat-card-content>
           <mat-form-field class="example-full-width">
             <mat-label>My name is:</mat-label>
-            <input matInput id="name" readonly>{{aText}}
+            <input matInput id="name" readonly>{{user.name}}
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>My surname is:</mat-label>
-            <input matInput id="surname" readonly>{{aText}}
+            <input matInput id="surname" readonly>{{user.surname}}
           </mat-form-field>
 
 
           <mat-form-field class="example-full-width">
             <mat-label>My DNI is:</mat-label>
-            <input matInput id="dni" readonly> {{aText}}
+            <input matInput id="dni" readonly> {{user.dni}}
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>My contact phone is:</mat-label>
-            <input matInput id="phone" readonly> {{aText}}
+            <input matInput id="phone" readonly> {{user.phone}}
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>I am a:</mat-label>
-            <input matInput id="gender" readonly> {{aText}}
+            <input matInput id="gender" readonly> {{user.gender}}
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>I am a:</mat-label>
-            <input matInput id="role" readonly> {{aText}}
+            <input matInput id="role" readonly> {{user.role}}
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>My penalties number is:</mat-label>
-            <input matInput id="penalties" readonly> {{aText}}
+            <input matInput id="penalties" readonly> {{user.penalties}}
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>My email is:</mat-label>
-            <input matInput id="email" readonly> {{aText}}
+            <input matInput id="email" readonly> {{user.email}}
           </mat-form-field>
 
-<!--          <button mat-raised-button color="primary"-->
-<!--                  (click)='changePassword()' [formGroup]="userFormGroup" [disabled]="userFormGroup.invalid">Change-->
-<!--            Password-->
-<!--          </button>-->
+          <!--          <button mat-raised-button color="primary"-->
+          <!--                  (click)='changePassword()' [formGroup]="userFormGroup" [disabled]="userFormGroup.invalid">Change-->
+          <!--            Password-->
+          <!--          </button>-->
 
-<!--          <button mat-raised-button color="primary"-->
-<!--                  (click)='changePhone()' [formGroup]="userFormGroup">Change Phone-->
-<!--          </button>-->
+          <!--          <button mat-raised-button color="primary"-->
+          <!--                  (click)='changePhone()' [formGroup]="userFormGroup">Change Phone-->
+          <!--          </button>-->
 
         </mat-card-content>
       </mat-card>

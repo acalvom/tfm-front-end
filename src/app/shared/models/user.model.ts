@@ -9,7 +9,7 @@ export class User {
   penalties: number;
   role: string;
   token?: string;
-  salt?: string;
+  phone?: string;
 
   copyProperties(item) {
     this.name = item.name;

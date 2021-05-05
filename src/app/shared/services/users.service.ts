@@ -25,6 +25,12 @@ export class UsersService {
     return this.http.get(this.BASE_URL + this.STUDENTS, {headers, observe: 'response'});
   }
 
+  getUserByEmail(userEmail: string) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.USERS + '/' + userEmail;
+    return this.http.get(url, {headers, observe: 'response'});
+  }
+
   deleteUser(userEmail: string) {
     const headers = this.authService.getHeaders();
     const url = this.BASE_URL + this.USERS + '/' + userEmail;

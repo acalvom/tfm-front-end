@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../shared/models/user.model';
+import {UsersService} from '../shared/services/users.service';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,23 +10,19 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
-  aText: string = 'hola';
+  user: User = new User();
 
-  constructor() {
+  constructor(private userService: UsersService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.setFormValues();
   }
 
-  userFormGroup = new FormGroup({
-    name: new FormControl(''),
-    surname: new FormControl(''),
-    dni: new FormControl(''),
-    phone: new FormControl(''),
-    gender: new FormControl(''),
-    role: new FormControl(''),
-    email: new FormControl(''),
-    penalties: new FormControl(''),
-  });
-
+  setFormValues() {
+    this.userService.getUserByEmail(this.authService.getLoggedUser()).subscribe(
+      (response: any) => {
+        this.user = response.body[0];
+      });
+  }
 }
