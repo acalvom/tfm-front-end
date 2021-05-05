@@ -47,14 +47,8 @@
             <input matInput id="email" readonly> {{user.email}}
           </mat-form-field>
 
-          <!--          <button mat-raised-button color="primary"-->
-          <!--                  (click)='changePassword()' [formGroup]="userFormGroup" [disabled]="userFormGroup.invalid">Change-->
-          <!--            Password-->
-          <!--          </button>-->
-
-          <!--          <button mat-raised-button color="primary"-->
-          <!--                  (click)='changePhone()' [formGroup]="userFormGroup">Change Phone-->
-          <!--          </button>-->
+          <button mat-raised-button color="primary" (click)='changePassword()'>Change Password</button>
+          <button mat-raised-button color="primary" (click)='changePhone()'>Change Phone</button>
 
         </mat-card-content>
       </mat-card>

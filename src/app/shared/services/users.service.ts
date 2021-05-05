@@ -11,6 +11,7 @@ export class UsersService {
   private BASE_URL = 'http://localhost:8000';
   private USERS = '/users';
   private STUDENTS = '/users/students';
+  private PASSWORD = '/users/password';
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -41,5 +42,11 @@ export class UsersService {
     const headers = this.authService.getHeaders();
     const url = this.BASE_URL + this.USERS + '/' + userEmail;
     return this.http.put(url, editedUser, {headers, observe: 'response'});
+  }
+
+  changePassword(userEmail: string, passwords: JSON) {
+    const headers = this.authService.getHeaders();
+    let url = this.BASE_URL + this.PASSWORD;
+    return this.http.post(url, {userEmail, passwords}, {headers, observe: 'response'});
   }
 }
