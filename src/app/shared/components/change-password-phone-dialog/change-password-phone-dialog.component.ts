@@ -37,20 +37,14 @@ export class ChangePasswordPhoneDialogComponent implements OnInit {
   }
 
   comparePasswords() {
-    console.log(this.changeFormGroup.get('newPassword'));
-    console.log(this.changeFormGroup.get('confirmPassword'));
-    if (this.changeFormGroup.get('newPassword') === this.changeFormGroup.get('confirmPassword')) {
-      console.log('same pass');
-    } else {
-      console.log('diff pass');
-    }
+    return (this.changeFormGroup.get('newPassword').value === this.changeFormGroup.get('confirmPassword').value);
   }
 
+
   update() {
-    if (this.isValidForm()) {
-      this.comparePasswords();
+    if (this.isValidForm() && this.comparePasswords()) {
+      this.dialog.close(this.changeFormGroup.value);
     }
-    // this.dialog.close(user);
   }
 
   close() {
