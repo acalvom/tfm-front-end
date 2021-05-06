@@ -49,6 +49,10 @@ export class AuthService {
     return new HttpHeaders().set('Authorization', token).set('Role', role);
   }
 
+  getLoggedUser(){
+    return this.getToken().split(',')[0];
+  }
+
   isAuthenticated(): boolean {
     return this.getToken() != null;
   }
@@ -64,6 +68,4 @@ export class AuthService {
   isStudent(): boolean {
     return (this.isAuthenticated()) && (this.getToken().split(',')[1] == 'student');
   }
-
-
 }

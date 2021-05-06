@@ -1,11 +1,26 @@
 <mat-toolbar color="primary" class="center">
   <span class="menu-spacer">Workout management</span>
-  <button mat-button routerLink="/home">Home</button>
-  <button *ngIf="isAdmin()" mat-button routerLink="/register">Register</button>
-  <button *ngIf="isAdmin()" mat-button routerLink="/users">Users</button>
-  <button *ngIf="isTeacher()" mat-button routerLink="/users">Students</button>
-  <button *ngIf="!isAuthenticated()" mat-button routerLink="/login">Login</button>
-  <button (click)="logoutUser()" *ngIf="isAuthenticated()" mat-button routerLink="/login">Logout</button>
+  <button mat-button routerLink="/home">Home
+    <mat-icon>home</mat-icon>
+  </button>
+  <button *ngIf="isAdmin()" mat-button routerLink="/register">Register
+    <mat-icon>person_add</mat-icon>
+  </button>
+  <button *ngIf="isAdmin()" mat-button routerLink="/users">Users
+    <mat-icon>group</mat-icon>
+  </button>
+  <button *ngIf="isTeacher()" mat-button routerLink="/users">Students
+    <mat-icon>group</mat-icon>
+  </button>
+  <button *ngIf="isAuthenticated()" mat-button routerLink="/profile">My Profile
+    <mat-icon>person</mat-icon>
+  </button>
+  <button *ngIf="!isAuthenticated()" mat-button routerLink="/login">Login
+    <mat-icon>login</mat-icon>
+  </button>
+  <button (click)="logoutUser()" *ngIf="isAuthenticated()" mat-button routerLink="/login">Logout
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

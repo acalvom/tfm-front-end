@@ -24,7 +24,7 @@ export class AdminComponent extends UsersComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) {
     super(userService, authService, router);
-    this.columns = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role', 'action'];
+    this.columns = ['name', 'surname', 'gender', 'email', 'phone', 'dni', 'penalties', 'role', 'action'];
   }
 
   ngOnInit(): void {

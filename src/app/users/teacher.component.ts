@@ -13,7 +13,7 @@ export class TeacherComponent extends UsersComponent implements OnInit {
 
   constructor(protected userService: UsersService, public authService: AuthService, protected router: Router) {
     super(userService, authService, router);
-    this.columns = ['name', 'surname', 'gender', 'email', 'dni', 'penalties', 'role'];
+    this.columns = ['name', 'surname', 'gender', 'email', 'phone', 'dni', 'penalties', 'role'];
   }
 
   ngOnInit(): void {
