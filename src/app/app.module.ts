@@ -19,6 +19,7 @@ import {YesNoDialogComponent} from './shared/components/yes-no-dialog/yes-no-dia
 import {EditUserDialogComponent} from './shared/components/edit-user-dialog/edit-user-dialog.component';
 import {ProfileComponent} from './profile/profile.component';
 import {ChangePasswordDialogComponent} from './shared/components/change-password-dialog/change-password-dialog.component';
+import {AddPhoneDialogComponent} from './shared/components/add-phone-dialog/add-phone-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {ChangePasswordDialogComponent} from './shared/components/change-password
     YesNoDialogComponent,
     EditUserDialogComponent,
     ChangePasswordDialogComponent,
+    AddPhoneDialogComponent,
     ProfileComponent
   ],
   imports: [
@@ -49,7 +51,8 @@ import {ChangePasswordDialogComponent} from './shared/components/change-password
   bootstrap: [AppComponent],
   entryComponents: [
     YesNoDialogComponent,
-    ChangePasswordDialogComponent
+    ChangePasswordDialogComponent,
+    AddPhoneDialogComponent
   ]
 })
 export class AppModule {

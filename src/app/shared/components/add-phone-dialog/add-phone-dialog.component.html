@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Add Phone Number</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Phone Number</mat-label>
+    <input matInput placeholder="666111444" id="phone" name="phone" [formControl]="phone" required>
+    <mat-icon matSuffix>phone</mat-icon>
+
+    <mat-error *ngIf="phone.invalid"> 'Invalid phone number'</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="close()">Close</button>
+  <button mat-raised-button color="primary" (click)="add()" [disabled]="phone.invalid">Add Phone </button>
+</mat-dialog-actions>
+
+
+

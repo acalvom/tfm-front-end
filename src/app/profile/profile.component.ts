@@ -5,6 +5,7 @@ import {AuthService} from '../shared/services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ChangePasswordDialogComponent} from '../shared/components/change-password-dialog/change-password-dialog.component';
+import {AddPhoneDialogComponent} from '../shared/components/add-phone-dialog/add-phone-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -46,6 +47,10 @@ export class ProfileComponent implements OnInit {
   }
 
   changePhone() {
-
+    this.dialog.open(AddPhoneDialogComponent)
+      .afterClosed().subscribe(
+      (phone: string) => {
+        console.log(phone);
+      });
   }
 }
