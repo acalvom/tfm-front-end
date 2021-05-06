@@ -35,7 +35,6 @@ export class ProfileComponent implements OnInit {
     this.dialog.open(ChangePasswordDialogComponent, {data: this.user})
       .afterClosed().subscribe(
       (passwords: JSON) => {
-        console.log(passwords);
         if (passwords) {
           this.userService.changePassword(this.user.email, passwords).subscribe(() => {
             this.snackBar.open('Password successfully changed', 'OK', {duration: 5000});
@@ -46,11 +45,15 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  changePhone() {
+  addPhone() {
     this.dialog.open(AddPhoneDialogComponent)
       .afterClosed().subscribe(
       (phone: string) => {
-        console.log(phone);
+        this.userService.addPhone(this.user.email, phone).subscribe(() => {
+          this.snackBar.open('Phone successfully added', 'OK', {duration: 5000});
+        }, (error) => {
+          this.snackBar.open('Phone cannot be added: Error ' + error.status, 'OK', {duration: 5000});
+        });
       });
   }
 }

@@ -12,6 +12,7 @@ export class UsersService {
   private USERS = '/users';
   private STUDENTS = '/users/students';
   private PASSWORD = '/users/password';
+  private PHONE = '/users/phone';
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -48,5 +49,11 @@ export class UsersService {
     const headers = this.authService.getHeaders();
     let url = this.BASE_URL + this.PASSWORD;
     return this.http.post(url, {userEmail, passwords}, {headers, observe: 'response'});
+  }
+
+  addPhone(userEmail: string, phone: string) {
+    const headers = this.authService.getHeaders();
+    let url = this.BASE_URL + this.PHONE;
+    return this.http.post(url, {userEmail, phone}, {headers, observe: 'response'});
   }
 }
