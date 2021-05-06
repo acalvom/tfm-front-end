@@ -50,6 +50,7 @@ export class ProfileComponent implements OnInit {
       .afterClosed().subscribe(
       (phone: string) => {
         this.userService.addPhone(this.user.email, phone).subscribe(() => {
+          this.getUserInformation();
           this.snackBar.open('Phone successfully added', 'OK', {duration: 5000});
         }, (error) => {
           this.snackBar.open('Phone cannot be added: Error ' + error.status, 'OK', {duration: 5000});
