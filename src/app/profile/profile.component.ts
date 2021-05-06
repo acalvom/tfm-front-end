@@ -4,7 +4,7 @@ import {UsersService} from '../shared/services/users.service';
 import {AuthService} from '../shared/services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {ChangePasswordPhoneDialogComponent} from '../shared/components/change-password-phone-dialog/change-password-phone-dialog.component';
+import {ChangePasswordDialogComponent} from '../shared/components/change-password-dialog/change-password-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   }
 
   changePassword() {
-    this.dialog.open(ChangePasswordPhoneDialogComponent, {data: this.user})
+    this.dialog.open(ChangePasswordDialogComponent, {data: this.user})
       .afterClosed().subscribe(
       (passwords: JSON) => {
         console.log(passwords);
