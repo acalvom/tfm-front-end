@@ -8,34 +8,31 @@
   background-position: 80% 50%;
 }
 
-
-#title > p {
-  text-align: center;
-  align-self: flex-end;
-  text-decoration: none;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
-  cursor: default;
-  color: #0e0e0e;
-  font-size: 7em;
-  animation: neon 2s ease-in-out infinite alternate;
-  -moz-user-select: none;
-  -webkit-user-select: none;
+#description {
+  max-width: 500px;
+  margin-left: 10%;
+  margin-top: 15%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
 }
 
-@keyframes neon {
-  from {
-    color: #ffffff;
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-    0 0 40px rgb(133, 133, 133), 0 0 70px rgb(133, 133, 133),
-    0 0 80px rgb(133, 133, 133), 0 0 100px rgb(133, 133, 133),
-    0 0 150px rgb(133, 133, 133);
-  }
-  to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
-    0 0 20px rgb(133, 133, 133), 0 0 35px rgb(133, 133, 133),
-    0 0 40px rgb(133, 133, 133), 0 0 50px rgb(133, 133, 133),
-    0 0 75px rgb(133, 133, 133);
-  }
+
+mat-card-title, h1 {
+  color: #c2185b;
+  font-size: 40px
+}
+
+mat-card-subtitle, h2 {
+  color: #e97ea3;
+  font-size: 20px;
+  justify-content: left;
+  align-items: start;
+}
+
+p {
+  font-size: 15px;
 }
