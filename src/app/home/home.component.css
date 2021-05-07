@@ -1,13 +1,17 @@
-#title {
-  height: 90%;
+.background {
   width: auto;
+  margin: 0;
+  padding: 1px;
+  height: 90%;
   background-size: cover;
-  background-image: url(../../assets/images/emptyGym.jpg);
+  background-image: url(../../assets/images/homeClean.jpg);
   background-position: 80% 50%;
-  text-align: center;
 }
 
+
 #title > p {
+  text-align: center;
+  align-self: flex-end;
   text-decoration: none;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
@@ -24,14 +28,14 @@
   from {
     color: #ffffff;
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-    0 0 40px rgb(194, 24, 91), 0 0 70px rgb(194, 24, 91),
-    0 0 80px rgb(194, 24, 91), 0 0 100px rgb(194, 24, 91),
-    0 0 150px rgb(194, 24, 91);
+    0 0 40px rgb(133, 133, 133), 0 0 70px rgb(133, 133, 133),
+    0 0 80px rgb(133, 133, 133), 0 0 100px rgb(133, 133, 133),
+    0 0 150px rgb(133, 133, 133);
   }
   to {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
-    0 0 20px rgb(194, 24, 91), 0 0 35px rgb(194, 24, 91),
-    0 0 40px rgb(194, 24, 91), 0 0 50px rgb(194, 24, 91),
-    0 0 75px rgb(194, 24, 91);
+    0 0 20px rgb(133, 133, 133), 0 0 35px rgb(133, 133, 133),
+    0 0 40px rgb(133, 133, 133), 0 0 50px rgb(133, 133, 133),
+    0 0 75px rgb(133, 133, 133);
   }
 }
