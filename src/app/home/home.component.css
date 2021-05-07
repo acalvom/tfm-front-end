@@ -1,0 +1,37 @@
+#title {
+  height: 90%;
+  width: auto;
+  background-size: cover;
+  background-image: url(../../assets/images/emptyGym.jpg);
+  background-position: 80% 50%;
+  text-align: center;
+}
+
+#title > p {
+  text-decoration: none;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: default;
+  color: #2e4457;
+  font-size: 7em;
+  animation: neon 2s ease-in-out infinite alternate;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+@keyframes neon {
+  from {
+    color: #ffffff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+    0 0 40px rgb(194, 24, 91), 0 0 70px rgb(194, 24, 91),
+    0 0 80px rgb(194, 24, 91), 0 0 100px rgb(194, 24, 91),
+    0 0 150px rgb(194, 24, 91);
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+    0 0 20px rgb(194, 24, 91), 0 0 35px rgb(194, 24, 91),
+    0 0 40px rgb(194, 24, 91), 0 0 50px rgb(194, 24, 91),
+    0 0 75px rgb(194, 24, 91);
+  }
+}
