@@ -13,7 +13,7 @@
   -moz-transition: all 0.5s;
   transition: all 0.5s;
   cursor: default;
-  color: #2e4457;
+  color: #0e0e0e;
   font-size: 7em;
   animation: neon 2s ease-in-out infinite alternate;
   -moz-user-select: none;
