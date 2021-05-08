@@ -1,0 +1,32 @@
+.background {
+  background-image: url(../../assets/images/homeClean.jpg);
+}
+
+#description {
+  max-width: 500px;
+  margin-left: 10%;
+  margin-top: 15%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+
+mat-card-title, h1 {
+  color: #c2185b;
+  font-size: 40px
+}
+
+mat-card-subtitle, h2 {
+  color: #e97ea3;
+  font-size: 20px;
+  justify-content: left;
+  align-items: start;
+}
+
+p {
+  font-size: 15px;
+}

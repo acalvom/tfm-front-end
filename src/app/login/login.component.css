@@ -11,3 +11,8 @@ mat-card {
 mat-form-field {
   display: block;
 }
+
+.background {
+  background-image: url(../../assets/images/fourDisks.jpg);
+}
+

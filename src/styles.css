@@ -7,3 +7,12 @@ body, html {
   padding: 1px;
   height: 100%;
 }
+
+.background {
+  width: auto;
+  margin: 0;
+  padding: 1px;
+  height: 90%;
+  background-size: cover;
+  background-position: 80% 50%;
+}

@@ -1,26 +1,14 @@
-.profile-card {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .example-full-width {
   width: 90%;
 }
 
 .mat-input-element {
-  font: inherit;
   background: transparent;
   border: none;
   outline: none;
-  padding: 5px;
-  margin: 0;
-  width: 100%;
+  padding: 3px;
   max-width: 100%;
   vertical-align: bottom;
-  text-align: inherit;
-  box-sizing: content-box;
 }
 
 .menu-container .mat-form-field + .mat-form-field {
@@ -28,16 +16,15 @@
 }
 
 mat-card {
-  max-width: 400px;
-  margin: 2em auto;
+  max-width: 500px;
+  margin-top: 10px;
   text-align: center;
 }
 
 img {
-  max-width: available;
-  margin: 2em auto;
   text-align: center;
-
+  width: 100%;
+  height: auto;
 }
 
 mat-form-field {
