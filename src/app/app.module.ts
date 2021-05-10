@@ -21,6 +21,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {ChangePasswordDialogComponent} from './shared/components/change-password-dialog/change-password-dialog.component';
 import {AddPhoneDialogComponent} from './shared/components/add-phone-dialog/add-phone-dialog.component';
 import {WorkoutsComponent} from './workouts/workouts.component';
+import {CreateWorkoutDialogComponent} from './shared/components/create-workout-dialog/create-workout-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {WorkoutsComponent} from './workouts/workouts.component';
     ChangePasswordDialogComponent,
     AddPhoneDialogComponent,
     ProfileComponent,
-    WorkoutsComponent
+    WorkoutsComponent,
+    CreateWorkoutDialogComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -54,7 +56,8 @@ import {WorkoutsComponent} from './workouts/workouts.component';
   entryComponents: [
     YesNoDialogComponent,
     ChangePasswordDialogComponent,
-    AddPhoneDialogComponent
+    AddPhoneDialogComponent,
+    CreateWorkoutDialogComponent
   ]
 })
 export class AppModule {

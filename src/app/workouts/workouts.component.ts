@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {CreateWorkoutDialogComponent} from '../shared/components/create-workout-dialog/create-workout-dialog.component';
+import {Workout} from '../shared/models/workout.model';
 
 @Component({
   selector: 'app-workouts',
@@ -7,12 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorkoutsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
   }
 
-  createWorkout(){
-    console.log("funciono")
+  createWorkout() {
+    console.log('funciono');
+    this.dialog.open(CreateWorkoutDialogComponent).afterClosed().subscribe(
+      (newWorkout: Workout) => {
+        if (newWorkout) {
+          console.log('workout' + newWorkout);
+        }
+      });
   }
+
 }
