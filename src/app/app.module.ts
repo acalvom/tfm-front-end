@@ -20,6 +20,7 @@ import {EditUserDialogComponent} from './shared/components/edit-user-dialog/edit
 import {ProfileComponent} from './profile/profile.component';
 import {ChangePasswordDialogComponent} from './shared/components/change-password-dialog/change-password-dialog.component';
 import {AddPhoneDialogComponent} from './shared/components/add-phone-dialog/add-phone-dialog.component';
+import {WorkoutsComponent} from './workouts/workouts.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {AddPhoneDialogComponent} from './shared/components/add-phone-dialog/add-
     EditUserDialogComponent,
     ChangePasswordDialogComponent,
     AddPhoneDialogComponent,
-    ProfileComponent
+    ProfileComponent,
+    WorkoutsComponent
   ],
   imports: [
     AngularMaterialModule,

@@ -13,6 +13,9 @@
   <button *ngIf="isTeacher()" mat-button routerLink="/users">Students
     <mat-icon>group</mat-icon>
   </button>
+  <button *ngIf="isTeacher()" mat-button routerLink="/workouts">Workouts
+    <mat-icon>fitness_center</mat-icon>
+  </button>
   <button *ngIf="isAuthenticated()" mat-button routerLink="/profile">My Profile
     <mat-icon>person</mat-icon>
   </button>
