@@ -17,11 +17,10 @@ export class WorkoutsComponent implements OnInit {
   }
 
   createWorkout() {
-    console.log('funciono');
     this.dialog.open(CreateWorkoutDialogComponent).afterClosed().subscribe(
       (newWorkout: Workout) => {
         if (newWorkout) {
-          console.log('workout' + newWorkout);
+          console.log(newWorkout);
         }
       });
   }

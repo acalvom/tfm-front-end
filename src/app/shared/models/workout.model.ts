@@ -13,12 +13,20 @@ export class Workout {
   copyProperties(item) {
     this.title = item.title;
     this.description = item.description;
-    this.circuit = item.circuit;
-    this.race = item.race;
-    this.bar = item.bar;
-    this.pullUps = item.pullUps;
+    this.circuit = this.covertToBoolean(item.circuit);
+    this.race = this.covertToBoolean(item.race);
+    this.bar = this.covertToBoolean(item.bar);
+    this.pullUps = this.covertToBoolean(item.pullUps);
     this.fitness = item.fitness;
     this.comments = item.comments;
     this.creationDate = item.creationDate;
+  }
+
+  covertToBoolean(value) {
+    let boolValue = value;
+    if (typeof boolValue === 'string') {
+      boolValue = value.toLowerCase() == 'true';
+    }
+    return boolValue;
   }
 }

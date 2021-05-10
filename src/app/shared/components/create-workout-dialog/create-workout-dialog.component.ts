@@ -21,7 +21,6 @@ export class CreateWorkoutDialogComponent implements OnInit {
     comments: new FormControl(''),
   });
 
-
   constructor(public dialog: MatDialogRef<CreateWorkoutDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Workout) {
   }
@@ -31,8 +30,9 @@ export class CreateWorkoutDialogComponent implements OnInit {
 
   create() {
     let newWorkout = new Workout();
-    console.log(newWorkout);
-    return newWorkout.copyProperties(this.createWorkoutFormGroup.value);
+    newWorkout.copyProperties(this.createWorkoutFormGroup.value);
+    newWorkout.creationDate = new Date();
+    this.dialog.close(newWorkout);
   }
 
   getErrorMessage(field: string) {
