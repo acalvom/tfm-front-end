@@ -12,4 +12,7 @@ export class WorkoutsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createWorkout(){
+    console.log("funciono")
+  }
 }
