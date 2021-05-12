@@ -10,7 +10,6 @@ import {ProfileComponent} from './profile/profile.component';
 import {WorkoutsComponent} from './workouts/workouts.component';
 
 const routes: Routes = [
-  // {path: '**', component: HomeComponent},
   {path: '', component: HomeComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},

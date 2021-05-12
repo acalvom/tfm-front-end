@@ -22,7 +22,6 @@ export class WorkoutsComponent implements OnInit {
     this.dialog.open(CreateWorkoutDialogComponent).afterClosed().subscribe(
       (newWorkout: Workout) => {
         if (newWorkout) {
-          console.log(newWorkout);
           this.workoutService.createWorkout(newWorkout).subscribe(() => {
             this.snackBar.open('Workout successfully created', 'OK', {duration: 3000});
           }, (error) => {
@@ -31,5 +30,4 @@ export class WorkoutsComponent implements OnInit {
         }
       });
   }
-
 }
