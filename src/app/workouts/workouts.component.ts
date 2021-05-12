@@ -17,26 +17,8 @@ import {MatSort} from '@angular/material/sort';
 
 export class WorkoutsComponent implements OnInit {
 
-  columns: string[] = ['id','title', 'description', 'circuit', 'race', 'bar',  'pullUps','fitness', 'comments', 'creationDate'];
+  columns: string[] = ['id', 'title', 'description', 'circuit', 'race', 'bar', 'pullups', 'fitness', 'comments', 'creationdate'];
   workouts: Workout[] = [];
-
-  simWO: any []= [
-    {title: 't1', description: 'd1'},
-    {title: 'u2', description: 'd2'},
-    {title: 'j3', description: 'd3'},
-    {title: 'l4', description: 'd4'},
-    {title: 's5', description: 'd5'},
-    {title: 'w1', description: 'd1'},
-    {title: 'g2', description: 'd2'},
-    {title: 'y3', description: 'd3'},
-    {title: 'r4', description: 'd4'},
-    {title: 'a5', description: 'd5'},
-    {title: 'ax1', description: 'd1'},
-    {title: 'th', description: 'd2'},
-    {title: 't3', description: 'd3'},
-    {title: 't4', description: 'd4'},
-    {title: 't5', description: 'd5'}
-  ]
   dataSource = new MatTableDataSource<Workout>();
 
   @ViewChild(MatSort) sort: MatSort;
@@ -75,8 +57,6 @@ export class WorkoutsComponent implements OnInit {
       (response: any) => {
         this.generateWorkoutFromArray(response.body);
         this.setTableTools();
-        console.log(this.dataSource.data)
-        console.log(this.dataSource.sort)
       });
   }
 

@@ -5,21 +5,22 @@ export class Workout {
   circuit: boolean;
   race: boolean;
   bar: boolean;
-  pullUps: boolean;
+  pullups: boolean;
   fitness?: string;
   comments?: string;
-  creationDate?: Date;
+  creationdate?: Date;
 
   copyProperties(item) {
+    this.id = item.id;
     this.title = item.title;
     this.description = item.description;
     this.circuit = this.covertToBoolean(item.circuit);
     this.race = this.covertToBoolean(item.race);
     this.bar = this.covertToBoolean(item.bar);
-    this.pullUps = this.covertToBoolean(item.pullUps);
+    this.pullups = this.covertToBoolean(item.pullups);
     this.fitness = item.fitness;
     this.comments = item.comments;
-    this.creationDate = item.creationDate;
+    this.creationdate = item.creationdate;
   }
 
   covertToBoolean(value) {
