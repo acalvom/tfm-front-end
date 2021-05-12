@@ -7,6 +7,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../shared/services/auth.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class WorkoutsComponent implements OnInit {
   dataSource = new MatTableDataSource<Workout>();
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public authService: AuthService,
               private workoutService: WorkoutsService,
@@ -31,25 +33,6 @@ export class WorkoutsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getWorkouts();
-  }
-
-  applyFilter(event: Event, dataSource: MatTableDataSource<Workout>) {
-    const filter = (event.target as HTMLInputElement).value;
-    dataSource.filter = filter.trim().toLowerCase();
-  }
-
-  generateWorkoutFromArray(anyArray: any) {
-    this.workouts = [];
-    for (let key in anyArray) {
-      let workout = new Workout();
-      workout.copyProperties(anyArray[key]);
-      this.workouts.push(workout);
-    }
-  }
-
-  setTableTools() {
-    this.dataSource.data = this.workouts as Workout[];
-    this.dataSource.sort = this.sort as MatSort;
   }
 
   getWorkouts() {
@@ -71,5 +54,29 @@ export class WorkoutsComponent implements OnInit {
           });
         }
       });
+  }
+
+  applyFilter(event: Event, dataSource: MatTableDataSource<Workout>) {
+    const filter = (event.target as HTMLInputElement).value;
+    dataSource.filter = filter.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  generateWorkoutFromArray(anyArray: any) {
+    this.workouts = [];
+    for (let key in anyArray) {
+      let workout = new Workout();
+      workout.copyProperties(anyArray[key]);
+      this.workouts.push(workout);
+    }
+  }
+
+  setTableTools() {
+    this.dataSource.data = this.workouts as Workout[];
+    this.dataSource.sort = this.sort as MatSort;
+    this.dataSource.paginator = this.paginator;
   }
 }
