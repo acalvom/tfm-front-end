@@ -8,3 +8,66 @@
   </div>
 </mat-card>
 
+<mat-form-field>
+  <mat-label>Filter workouts</mat-label>
+  <input matInput (keyup)="applyFilter($event, dataSource)" placeholder="Find">
+</mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort >
+    <caption>Workouts list</caption>
+
+    <ng-container matColumnDef="id">
+      <th id="id" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th id="title" mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th id="description" mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="circuit">
+      <th id="circuit" mat-header-cell *matHeaderCellDef >Circuit</th>
+      <td mat-cell *matCellDef="let element"> {{element.circuit}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="race">
+      <th id="race" mat-header-cell *matHeaderCellDef >Race</th>
+      <td mat-cell *matCellDef="let element"> {{element.race}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bar">
+      <th id="bar" mat-header-cell *matHeaderCellDef >Bar</th>
+      <td mat-cell *matCellDef="let element"> {{element.bar}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pullUps">
+      <th id="pullUps" mat-header-cell *matHeaderCellDef>PullUps</th>
+      <td mat-cell *matCellDef="let element"> {{element.pullUps}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fitness">
+      <th id="fitness" mat-header-cell *matHeaderCellDef>Fitness</th>
+      <td mat-cell *matCellDef="let element"> {{element.fitness}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="comments">
+      <th id="comments" mat-header-cell *matHeaderCellDef mat-sort-header>Comments</th>
+      <td mat-cell *matCellDef="let element"> {{element.comments}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="creationDate">
+      <th id="creationDate" mat-header-cell *matHeaderCellDef >CreationDate</th>
+      <td mat-cell *matCellDef="let element"> {{element.creationDate}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+  </table>
