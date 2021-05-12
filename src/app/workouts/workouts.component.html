@@ -1,7 +1,7 @@
 <mat-card>
   <div class="row justify-content-end">
     <div class="example-button-container ">
-      <button mat-mini-fab color="primary" (click)="createWorkout()" title="Create Workout">
+      <button *ngIf="authService.isTeacher()" mat-mini-fab color="primary" (click)="createWorkout()" title="Create Workout">
         <mat-icon>add</mat-icon>
       </button>
     </div>

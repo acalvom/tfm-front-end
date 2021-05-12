@@ -4,6 +4,7 @@ import {CreateWorkoutDialogComponent} from '../shared/components/create-workout-
 import {Workout} from '../shared/models/workout.model';
 import {WorkoutsService} from '../shared/services/workouts.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-workouts',
@@ -12,7 +13,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class WorkoutsComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, private workoutService: WorkoutsService, private snackBar: MatSnackBar) {
+  constructor(public authService: AuthService,
+              private workoutService: WorkoutsService,
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
