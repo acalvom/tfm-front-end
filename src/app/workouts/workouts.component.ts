@@ -8,6 +8,7 @@ import {AuthService} from '../shared/services/auth.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-dialog.component';
 
 
 @Component({
@@ -32,6 +33,9 @@ export class WorkoutsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.authService.isTeacher()) {
+      this.columns = ['id', 'title', 'description', 'circuit', 'race', 'bar', 'pullups', 'fitness', 'comments', 'creationdate', 'action'];
+    }
     this.getWorkouts();
   }
 
@@ -52,6 +56,16 @@ export class WorkoutsComponent implements OnInit {
           }, (error) => {
             this.snackBar.open('Workout cannot be created: Error ' + error.status, 'OK', {duration: 3000});
           });
+        }
+      });
+  }
+
+  deleteWorkout(workout: Workout) {
+    let data = 'Do you really want to delete workout ' + workout.id + ' ?';
+    this.dialog.open(YesNoDialogComponent, {data: data}).afterClosed().subscribe(
+      (remove: Boolean) => {
+        if (remove) {
+          console.log('deleted id ' + workout.id);
         }
       });
   }
