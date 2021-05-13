@@ -16,7 +16,7 @@ export class CreateWorkoutDialogComponent implements OnInit {
     circuit: new FormControl('', [Validators.required]),
     race: new FormControl('', [Validators.required]),
     bar: new FormControl('', [Validators.required]),
-    pullUps: new FormControl('', [Validators.required]),
+    pullups: new FormControl('', [Validators.required]),
     fitness: new FormControl(''),
     comments: new FormControl(''),
   });
@@ -32,6 +32,7 @@ export class CreateWorkoutDialogComponent implements OnInit {
     let newWorkout = new Workout();
     newWorkout.copyProperties(this.createWorkoutFormGroup.value);
     newWorkout.creationdate = new Date();
+    console.log(newWorkout);
     this.dialog.close(newWorkout);
   }
 

@@ -43,11 +43,11 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Pull Ups</mat-label>
-    <mat-select id="pullUps" formControlName="pullUps" required>
+    <mat-select id="pullups" formControlName="pullups" required>
       <mat-option value="true">Yes</mat-option>
       <mat-option value="false">No</mat-option>
     </mat-select>
-    <mat-error *ngIf="createWorkoutFormGroup.get('pullUps').invalid"> You must choose an option</mat-error>
+    <mat-error *ngIf="createWorkoutFormGroup.get('pullups').invalid"> You must choose an option</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
