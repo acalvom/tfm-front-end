@@ -31,7 +31,7 @@ export class CreateWorkoutDialogComponent implements OnInit {
   create() {
     let newWorkout = new Workout();
     newWorkout.copyProperties(this.createWorkoutFormGroup.value);
-    newWorkout.creationDate = new Date();
+    newWorkout.creationdate = new Date();
     this.dialog.close(newWorkout);
   }
 

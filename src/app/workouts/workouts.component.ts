@@ -1,21 +1,46 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateWorkoutDialogComponent} from '../shared/components/create-workout-dialog/create-workout-dialog.component';
 import {Workout} from '../shared/models/workout.model';
 import {WorkoutsService} from '../shared/services/workouts.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {AuthService} from '../shared/services/auth.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-workouts',
   templateUrl: './workouts.component.html',
   styleUrls: ['./workouts.component.css']
 })
+
 export class WorkoutsComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, private workoutService: WorkoutsService, private snackBar: MatSnackBar) {
+  columns: string[] = ['id', 'title', 'description', 'circuit', 'race', 'bar', 'pullups', 'fitness', 'comments', 'creationdate'];
+  workouts: Workout[] = [];
+  dataSource = new MatTableDataSource<Workout>();
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(public authService: AuthService,
+              private workoutService: WorkoutsService,
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.getWorkouts();
+  }
+
+  getWorkouts() {
+    this.workoutService.getWorkouts().subscribe(
+      (response: any) => {
+        this.generateWorkoutFromArray(response.body);
+        this.setTableTools();
+      });
   }
 
   createWorkout() {
@@ -29,5 +54,29 @@ export class WorkoutsComponent implements OnInit {
           });
         }
       });
+  }
+
+  applyFilter(event: Event, dataSource: MatTableDataSource<Workout>) {
+    const filter = (event.target as HTMLInputElement).value;
+    dataSource.filter = filter.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  generateWorkoutFromArray(anyArray: any) {
+    this.workouts = [];
+    for (let key in anyArray) {
+      let workout = new Workout();
+      workout.copyProperties(anyArray[key]);
+      this.workouts.push(workout);
+    }
+  }
+
+  setTableTools() {
+    this.dataSource.data = this.workouts as Workout[];
+    this.dataSource.sort = this.sort as MatSort;
+    this.dataSource.paginator = this.paginator;
   }
 }

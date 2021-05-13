@@ -1,10 +1,76 @@
-<mat-card>
-  <div class="row justify-content-end">
-    <div class="example-button-container ">
-      <button mat-mini-fab color="primary" (click)="createWorkout()" title="Create Workout">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
+<div class="row justify-content-end mr-5 mt-3">
+  <div class="example-button-container ">
+    <button *ngIf="authService.isTeacher()" mat-fab color="primary" (click)="createWorkout()"
+            title="Create Workout">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
-</mat-card>
+</div>
+<div class="mx-3">
+  <mat-form-field>
+    <mat-label>Filter workouts</mat-label>
+    <input matInput (keyup)="applyFilter($event, dataSource)" placeholder="Find">
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <caption>Workouts list</caption>
+
+      <ng-container matColumnDef="id">
+        <th id="id" mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th id="title" mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th id="description" mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="circuit">
+        <th id="circuit" mat-header-cell *matHeaderCellDef>Circuit</th>
+        <td mat-cell *matCellDef="let element"> {{element.circuit | booleanYesNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="race">
+        <th id="race" mat-header-cell *matHeaderCellDef>Race</th>
+        <td mat-cell *matCellDef="let element"> {{element.race | booleanYesNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bar">
+        <th id="bar" mat-header-cell *matHeaderCellDef>Bar</th>
+        <td mat-cell *matCellDef="let element"> {{element.bar | booleanYesNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pullups">
+        <th id="pullups" mat-header-cell *matHeaderCellDef>Pull Ups</th>
+        <td mat-cell *matCellDef="let element"> {{element.pullups | booleanYesNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fitness">
+        <th id="fitness" mat-header-cell *matHeaderCellDef>Fitness</th>
+        <td mat-cell *matCellDef="let element"> {{element.fitness}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="comments">
+        <th id="comments" mat-header-cell *matHeaderCellDef>Comments</th>
+        <td mat-cell *matCellDef="let element"> {{element.comments}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="creationdate">
+        <th id="creationdate" mat-header-cell *matHeaderCellDef mat-sort-header>Creation Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.creationdate | date:'dd/MM/yyyy - hh:mm'}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  </div>
+</div>
 
