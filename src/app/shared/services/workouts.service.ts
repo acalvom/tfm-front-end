@@ -10,7 +10,7 @@ export class WorkoutsService {
 
   private BASE_URL = 'http://localhost:8000';
   private WORKOUTS_CREATE = '/workouts/create';
-  private WORKOUTS= '/workouts';
+  private WORKOUTS = '/workouts';
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -24,6 +24,12 @@ export class WorkoutsService {
     const headers = this.authService.getHeaders();
     let url = this.BASE_URL + this.WORKOUTS_CREATE;
     return this.http.post(url, workout, {headers, observe: 'response'});
+  }
+
+  deleteWorkout(id: number) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.WORKOUTS + '/' + id;
+    return this.http.delete(url, {headers, observe: 'response'});
   }
 
 }

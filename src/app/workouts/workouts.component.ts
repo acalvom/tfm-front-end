@@ -65,7 +65,12 @@ export class WorkoutsComponent implements OnInit {
     this.dialog.open(YesNoDialogComponent, {data: data}).afterClosed().subscribe(
       (remove: Boolean) => {
         if (remove) {
-          console.log('deleted id ' + workout.id);
+          this.workoutService.deleteWorkout(workout.id).subscribe(() => {
+            this.snackBar.open('Workout successfully deleted', 'OK', {duration: 3000});
+            this.getWorkouts();
+          }, (error) => {
+            this.snackBar.open('Workout cannot be deleted: Error ' + error.status, 'OK', {duration: 3000});
+          });
         }
       });
   }
