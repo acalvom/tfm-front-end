@@ -32,4 +32,10 @@ export class WorkoutsService {
     return this.http.delete(url, {headers, observe: 'response'});
   }
 
+  editWorkout(id: number, editedWorkout: Workout) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.WORKOUTS + '/' + id;
+    return this.http.put(url, editedWorkout, {headers, observe: 'response'});
+  }
+
 }

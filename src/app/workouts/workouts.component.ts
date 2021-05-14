@@ -82,6 +82,12 @@ export class WorkoutsComponent implements OnInit {
       (editedWorkout: Workout) => {
         if (editedWorkout) {
           console.log(editedWorkout);
+          this.workoutService.editWorkout(workout.id, editedWorkout).subscribe(() => {
+            this.snackBar.open('Workout successfully edited', 'OK', {duration: 3000});
+            this.getWorkouts();
+          }, (error) => {
+            this.snackBar.open('Workout cannot be edited: Error ' + error.status, 'OK', {duration: 3000});
+          });
         }
       });
   }

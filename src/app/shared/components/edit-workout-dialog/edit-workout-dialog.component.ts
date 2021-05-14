@@ -29,46 +29,16 @@ export class EditWorkoutDialogComponent implements OnInit {
   }
 
   update() {
-    let workout;
-    workout = (this.editWorkoutFormGroup.value);
-    console.log('this.data');
-
-    console.log(this.data);
-    console.log('workout');
-    console.log(workout);
-    if (workout.title === '') {
-      workout.title = this.data.title;
+    let form;
+    form = (this.editWorkoutFormGroup.value);
+    for (let key in form) {
+      if (form[key] === '') {
+        form[key] = this.data[key];
+      }
     }
-    if (workout.description === '') {
-      workout.description = this.data.description;
-    }
-    if (workout.circuit === '') {
-      workout.circuit = this.data.circuit;
-    }
-    if (workout.race === '') {
-      workout.race = this.data.race;
-    }
-    if (workout.bar === '') {
-      workout.bar = this.data.bar;
-    }
-    if (workout.pullups === '') {
-      workout.pullups = this.data.pullups;
-    }
-    if (workout.fitness === '') {
-      workout.fitness = this.data.fitness;
-    }
-    if (workout.comments === '') {
-      workout.comments = this.data.comments;
-    }
-    let nn = new Workout();
-    nn.copyProperties(workout);
-    console.log('nn');
-    console.log(nn);
+    let workout = new Workout();
+    workout.copyProperties(form);
     this.dialog.close(workout);
-  }
-
-  isValidForm() {
-    return this.editWorkoutFormGroup.valid;
   }
 
   close() {
