@@ -23,6 +23,7 @@ import {AddPhoneDialogComponent} from './shared/components/add-phone-dialog/add-
 import {WorkoutsComponent} from './workouts/workouts.component';
 import {CreateWorkoutDialogComponent} from './shared/components/create-workout-dialog/create-workout-dialog.component';
 import {BooleanYesNoPipe} from './shared/pipes/boolean-yes-no.pipe';
+import {EditWorkoutDialogComponent} from './shared/components/edit-workout-dialog/edit-workout-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +35,13 @@ import {BooleanYesNoPipe} from './shared/pipes/boolean-yes-no.pipe';
     AdminComponent,
     TeacherComponent,
     YesNoDialogComponent,
-    EditUserDialogComponent,
     ChangePasswordDialogComponent,
     AddPhoneDialogComponent,
     ProfileComponent,
     WorkoutsComponent,
     CreateWorkoutDialogComponent,
+    EditUserDialogComponent,
+    EditWorkoutDialogComponent,
     BooleanYesNoPipe
   ],
   imports: [
@@ -59,7 +61,8 @@ import {BooleanYesNoPipe} from './shared/pipes/boolean-yes-no.pipe';
     YesNoDialogComponent,
     ChangePasswordDialogComponent,
     AddPhoneDialogComponent,
-    CreateWorkoutDialogComponent
+    CreateWorkoutDialogComponent,
+    EditWorkoutDialogComponent
   ]
 })
 export class AppModule {

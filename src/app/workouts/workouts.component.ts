@@ -9,6 +9,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-dialog.component';
+import {EditWorkoutDialogComponent} from '../shared/components/edit-workout-dialog/edit-workout-dialog.component';
 
 
 @Component({
@@ -52,6 +53,7 @@ export class WorkoutsComponent implements OnInit {
       (newWorkout: Workout) => {
         if (newWorkout) {
           this.workoutService.createWorkout(newWorkout).subscribe(() => {
+            this.getWorkouts();
             this.snackBar.open('Workout successfully created', 'OK', {duration: 3000});
           }, (error) => {
             this.snackBar.open('Workout cannot be created: Error ' + error.status, 'OK', {duration: 3000});
@@ -70,6 +72,21 @@ export class WorkoutsComponent implements OnInit {
             this.getWorkouts();
           }, (error) => {
             this.snackBar.open('Workout cannot be deleted: Error ' + error.status, 'OK', {duration: 3000});
+          });
+        }
+      });
+  }
+
+  updateWorkout(workout: Workout) {
+    this.dialog.open(EditWorkoutDialogComponent, {data: workout}).afterClosed().subscribe(
+      (editedWorkout: Workout) => {
+        if (editedWorkout) {
+          console.log(editedWorkout);
+          this.workoutService.editWorkout(workout.id, editedWorkout).subscribe(() => {
+            this.snackBar.open('Workout successfully edited', 'OK', {duration: 3000});
+            this.getWorkouts();
+          }, (error) => {
+            this.snackBar.open('Workout cannot be edited: Error ' + error.status, 'OK', {duration: 3000});
           });
         }
       });

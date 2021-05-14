@@ -1,53 +1,51 @@
-<h2 mat-dialog-title>Create new workout</h2>
+<h2 mat-dialog-title>Edit workout</h2>
 
-<mat-dialog-content [formGroup]="createWorkoutFormGroup">
+<mat-dialog-content [formGroup]="editWorkoutFormGroup">
 
   <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
-    <input matInput id="title" name="title" formControlName="title" required>
-    <mat-error *ngIf="createWorkoutFormGroup.get('title').invalid"> {{getErrorMessage('title')}}</mat-error>
+    <input matInput id="title" name="title" formControlName="title">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
-    <textarea matInput id="description" name="description" formControlName="description" required></textarea>
-    <mat-error *ngIf="createWorkoutFormGroup.get('description').invalid"> {{getErrorMessage('description')}}</mat-error>
+    <textarea matInput id="description" name="description" formControlName="description"></textarea>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Circuit</mat-label>
-    <mat-select id="circuit" formControlName="circuit" required>
+    <mat-select id="circuit" formControlName="circuit">
+      <mat-option value=" ">-</mat-option>
       <mat-option value="true">Yes</mat-option>
       <mat-option value="false">No</mat-option>
     </mat-select>
-    <mat-error *ngIf="createWorkoutFormGroup.get('circuit').invalid"> You must choose an option</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Race</mat-label>
-    <mat-select id="race" formControlName="race" required>
+    <mat-select id="race" formControlName="race">
+      <mat-option value=" ">-</mat-option>
       <mat-option value="true">Yes</mat-option>
       <mat-option value="false">No</mat-option>
     </mat-select>
-    <mat-error *ngIf="createWorkoutFormGroup.get('race').invalid"> You must choose an option</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Bar</mat-label>
-    <mat-select id="bar" formControlName="bar" required>
+    <mat-select id="bar" formControlName="bar">
+      <mat-option value=" ">-</mat-option>
       <mat-option value="true">Yes</mat-option>
       <mat-option value="false">No</mat-option>
     </mat-select>
-    <mat-error *ngIf="createWorkoutFormGroup.get('bar').invalid"> You must choose an option</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Pull Ups</mat-label>
-    <mat-select id="pullups" formControlName="pullups" required>
+    <mat-select id="pullups" formControlName="pullups">
+      <mat-option value=" ">-</mat-option>
       <mat-option value="true">Yes</mat-option>
       <mat-option value="false">No</mat-option>
     </mat-select>
-    <mat-error *ngIf="createWorkoutFormGroup.get('pullups').invalid"> You must choose an option</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
@@ -64,8 +62,8 @@
 
 <mat-dialog-actions>
   <button class="mat-raised-button" (click)="close()">Cancel</button>
-  <button mat-raised-button color="primary" (click)='create()'
-          [formGroup]="createWorkoutFormGroup" [disabled]="createWorkoutFormGroup.invalid">Create
+  <button mat-raised-button color="primary" (click)='update()'
+          [formGroup]="editWorkoutFormGroup">Update
   </button>
 
 </mat-dialog-actions>
