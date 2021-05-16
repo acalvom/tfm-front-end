@@ -24,6 +24,7 @@ import {WorkoutsComponent} from './workouts/workouts.component';
 import {CreateWorkoutDialogComponent} from './shared/components/create-workout-dialog/create-workout-dialog.component';
 import {BooleanYesNoPipe} from './shared/pipes/boolean-yes-no.pipe';
 import {EditWorkoutDialogComponent} from './shared/components/edit-workout-dialog/edit-workout-dialog.component';
+import {ClassesComponent} from './classes/classes.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {EditWorkoutDialogComponent} from './shared/components/edit-workout-dialo
     CreateWorkoutDialogComponent,
     EditUserDialogComponent,
     EditWorkoutDialogComponent,
-    BooleanYesNoPipe
+    BooleanYesNoPipe,
+    ClassesComponent
   ],
   imports: [
     AngularMaterialModule,
