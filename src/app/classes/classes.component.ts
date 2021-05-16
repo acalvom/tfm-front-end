@@ -26,7 +26,7 @@ export class ClassesComponent implements OnInit {
     this.dialog.open(CreateClassDialogComponent).afterClosed().subscribe(
       (newClass: Class) => {
         if (newClass) {
-          console.log(newClass);
+          newClass.code = newClass.init_day_hour.toLocaleString() + '-' + newClass.location;
           this.classesService.createClass(newClass).subscribe(() => {
             this.snackBar.open('Class successfully created', 'OK', {duration: 3000});
           }, (error) => {
