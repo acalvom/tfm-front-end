@@ -3,10 +3,39 @@
 <mat-dialog-content [formGroup]="createClassFormGroup">
 
   <mat-form-field appearance="fill">
-    <mat-label>Day</mat-label>
-    <input matInput [matDatepicker]="dayPicker" id="day" name="day" formControlName="day" required>
-    <mat-datepicker-toggle matSuffix [for]="dayPicker"></mat-datepicker-toggle>
-    <mat-datepicker #dayPicker></mat-datepicker>
+    <mat-label>From:</mat-label>
+    <input matInput [ngxMatDatetimePicker]="initDateHourPicker" id="init_day_hour" name="init_day_hour"
+           formControlName="init_day_hour" required>
+    <mat-datepicker-toggle matSuffix [for]="initDateHourPicker"></mat-datepicker-toggle>
+    <ngx-mat-datetime-picker #initDateHourPicker></ngx-mat-datetime-picker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>To:</mat-label>
+    <input matInput [ngxMatDatetimePicker]="endDateHourPicker" id="end_day_hour" name="end_day_hour"
+           formControlName="end_day_hour" required>
+    <mat-datepicker-toggle matSuffix [for]="endDateHourPicker"></mat-datepicker-toggle>
+    <ngx-mat-datetime-picker #endDateHourPicker></ngx-mat-datetime-picker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Max. places</mat-label>
+    <input matInput id="max_places" name="max_places" formControlName="max_places" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Location</mat-label>
+    <input matInput id="location" name="location" formControlName="location" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Comments</mat-label>
+    <textarea matInput id="location_details" name="location_details" formControlName="location_details"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Workout</mat-label>
+    <input matInput id="id_workout" name="id_workout" formControlName="id_workout" required>
   </mat-form-field>
 
 </mat-dialog-content>

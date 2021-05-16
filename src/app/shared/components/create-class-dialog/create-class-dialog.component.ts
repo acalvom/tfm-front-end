@@ -11,7 +11,12 @@ import {Class} from '../../models/class.model';
 export class CreateClassDialogComponent implements OnInit {
 
   createClassFormGroup = new FormGroup({
-    day: new FormControl('', [Validators.required])
+    init_day_hour: new FormControl('', [Validators.required]),
+    end_day_hour: new FormControl('', [Validators.required]),
+    max_places: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+    location_details: new FormControl(''),
+    id_workout: new FormControl('', [Validators.required])
   });
 
   constructor(public dialog: MatDialogRef<CreateClassDialogComponent>) {
@@ -22,8 +27,11 @@ export class CreateClassDialogComponent implements OnInit {
 
   create() {
     let newClass = new Class();
+    console.log('form');
+    console.log(this.createClassFormGroup.value);
+
     newClass.copyProperties(this.createClassFormGroup.value);
-    console.log(newClass);
+    //console.log(newClass);
     this.dialog.close(newClass);
   }
 
