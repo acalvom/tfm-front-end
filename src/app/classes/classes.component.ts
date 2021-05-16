@@ -21,7 +21,6 @@ export class ClassesComponent implements OnInit {
   }
 
   createClass() {
-    console.log('create class works');
     this.dialog.open(CreateClassDialogComponent).afterClosed().subscribe(
       (newClass: Class) => {
         if (newClass) {

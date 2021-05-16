@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Class} from '../../models/class.model';
+import {WorkoutsService} from '../../services/workouts.service';
 
 @Component({
   selector: 'app-create-class-dialog',
@@ -19,20 +20,30 @@ export class CreateClassDialogComponent implements OnInit {
     id_workout: new FormControl('', [Validators.required])
   });
 
-  constructor(public dialog: MatDialogRef<CreateClassDialogComponent>) {
+  constructor(public dialog: MatDialogRef<CreateClassDialogComponent>, private workoutService: WorkoutsService) {
   }
 
   ngOnInit(): void {
   }
 
   create() {
+    this.verifyWorkout();
     let newClass = new Class();
     console.log('form');
     console.log(this.createClassFormGroup.value);
 
     newClass.copyProperties(this.createClassFormGroup.value);
-    //console.log(newClass);
     this.dialog.close(newClass);
+  }
+
+  verifyWorkout(){
+    this.workoutService.getWorkout(this.createClassFormGroup.get('id_workout').value).subscribe(
+      response => {
+        console.log(response.status)
+      },
+      (error) => {
+        console.log(error.status)
+      });
   }
 
   close() {
