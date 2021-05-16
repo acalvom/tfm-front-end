@@ -6,11 +6,18 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AngularMaterialModule} from './shared/material/angular-material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
+
 import {HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-
 import {AuthService} from './shared/services/auth.service';
 import {UsersComponent} from './users/users.component';
 import {AdminComponent} from './users/admin.component';
@@ -55,6 +62,11 @@ import {CreateClassDialogComponent} from './shared/components/create-class-dialo
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
     HttpClientModule
   ],
   providers: [
