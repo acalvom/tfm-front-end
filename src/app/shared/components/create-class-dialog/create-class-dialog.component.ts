@@ -11,6 +11,9 @@ import {WorkoutsService} from '../../services/workouts.service';
 })
 export class CreateClassDialogComponent implements OnInit {
 
+  workout_idErrorMsg: string;
+  workout_idError: boolean;
+
   createClassFormGroup = new FormGroup({
     init_day_hour: new FormControl('', [Validators.required]),
     end_day_hour: new FormControl('', [Validators.required]),
@@ -27,27 +30,43 @@ export class CreateClassDialogComponent implements OnInit {
   }
 
   create() {
-    this.verifyWorkout();
-    let newClass = new Class();
-    console.log('form');
-    console.log(this.createClassFormGroup.value);
-
-    newClass.copyProperties(this.createClassFormGroup.value);
-    this.dialog.close(newClass);
+    if (this.isValidForm()) {
+      let newClass = new Class();
+      newClass.copyProperties(this.createClassFormGroup.value);
+      this.dialog.close(newClass);
+    }
   }
 
-  verifyWorkout(){
+  verifyWorkout(evt) {
     this.workoutService.getWorkout(this.createClassFormGroup.get('id_workout').value).subscribe(
       response => {
-        console.log(response.status)
+        if (response.status === 200) {
+          this.workout_idErrorMsg = '';
+          this.workout_idError = false;
+          evt.preventDefault();
+        }
       },
       (error) => {
-        console.log(error.status)
+        this.workout_idErrorMsg = 'Workout ' + this.createClassFormGroup.get('id_workout').value + ' ' + error.statusText;
+        this.workout_idError = true;
       });
+  }
+
+  isValidForm() {
+    return this.createClassFormGroup.valid && !this.workout_idError;
   }
 
   close() {
     this.dialog.close();
   }
+
+  getErrorMessage(field: string) {
+    if (this.createClassFormGroup.get(field).hasError('required')) {
+      return 'You must enter a value';
+    } else {
+      return '';
+    }
+  }
+
 
 }
