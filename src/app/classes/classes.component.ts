@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../shared/services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Workout} from '../shared/models/workout.model';
 import {CreateClassDialogComponent} from '../shared/components/create-class-dialog/create-class-dialog.component';
+import {Class} from '../shared/models/class.model';
 
 @Component({
   selector: 'app-classes',
@@ -23,9 +23,9 @@ export class ClassesComponent implements OnInit {
   createClass() {
     console.log('create class works');
     this.dialog.open(CreateClassDialogComponent).afterClosed().subscribe(
-      (newWorkout: Workout) => {
-        if (newWorkout) {
-          console.log(newWorkout);
+      (newClass: Class) => {
+        if (newClass) {
+          console.log(newClass);
         }
       });
   }
