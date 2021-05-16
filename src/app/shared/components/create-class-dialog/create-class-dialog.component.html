@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Create new class</h2>
+
+<mat-dialog-content [formGroup]="createClassFormGroup">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Day</mat-label>
+    <input matInput [matDatepicker]="dayPicker" id="day" name="day" formControlName="day" required>
+    <mat-datepicker-toggle matSuffix [for]="dayPicker"></mat-datepicker-toggle>
+    <mat-datepicker #dayPicker></mat-datepicker>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)='create()'
+          [formGroup]="createClassFormGroup">Create
+  </button>
+
+</mat-dialog-actions>
