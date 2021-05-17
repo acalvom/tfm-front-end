@@ -8,6 +8,7 @@ export class Class {
   location: string;
   location_details?: string;
   id_workout: number;
+  expired?: boolean;
 
   copyProperties(item) {
     this.id = item.id;
@@ -19,5 +20,12 @@ export class Class {
     this.location = item.location;
     this.location_details = item.location_details;
     this.id_workout = item.id_workout;
+    this.expired = this.isExpired();
+  }
+
+  isExpired() {
+    let endMS = new Date(this.end_day_hour).getTime();
+    let now = Date.now();
+    return endMS < now;
   }
 }
