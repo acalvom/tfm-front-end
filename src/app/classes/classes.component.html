@@ -48,7 +48,8 @@
 
       <ng-container matColumnDef="end_day_hour">
         <th id="end_day_hour" mat-header-cell *matHeaderCellDef mat-sort-header>To</th>
-        <td mat-cell *matCellDef="let element"> {{element.end_day_hour | date:'dd/MM/yyyy - hh:mm:ss'}} </td>
+        <td [style.color]="element.expired ? 'red' : 'green'"
+            mat-cell *matCellDef="let element"> {{element.end_day_hour | date:'dd/MM/yyyy - hh:mm:ss'}} </td>
       </ng-container>
 
       <ng-container matColumnDef="max_places">

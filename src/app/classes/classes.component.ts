@@ -20,7 +20,6 @@ export class ClassesComponent implements OnInit {
   classes: Class[] = [];
   dataSource = new MatTableDataSource<Class>();
 
-
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -55,7 +54,6 @@ export class ClassesComponent implements OnInit {
         }
       });
   }
-
 
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
     const filter = (event.target as HTMLInputElement).value;
