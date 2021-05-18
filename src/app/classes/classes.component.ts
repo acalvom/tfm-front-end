@@ -77,6 +77,11 @@ export class ClassesComponent implements OnInit {
       });
   }
 
+  updateClass(aClass: Class) {
+    console.log(aClass)
+
+  }
+
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
     const filter = (event.target as HTMLInputElement).value;
     dataSource.filter = filter.trim().toLowerCase();
