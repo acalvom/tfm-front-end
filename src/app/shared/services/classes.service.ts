@@ -33,4 +33,10 @@ export class ClassesService {
     return this.http.delete(url, {headers, observe: 'response'});
   }
 
+  editClass(code: string, editedClass: Class) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.CLASSES + '/' + code;
+    return this.http.put(url, editedClass, {headers, observe: 'response'});
+  }
+
 }
