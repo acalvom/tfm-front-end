@@ -71,7 +71,7 @@ export class WorkoutsComponent implements OnInit {
             this.snackBar.open('Workout successfully deleted', 'OK', {duration: 3000});
             this.getWorkouts();
           }, (error) => {
-            this.snackBar.open('Workout cannot be deleted: Error ' + error.status, 'OK', {duration: 3000});
+            this.snackBar.open(error.error[0], 'OK', {duration: 5000});
           });
         }
       });

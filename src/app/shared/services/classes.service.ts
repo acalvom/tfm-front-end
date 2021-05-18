@@ -27,4 +27,10 @@ export class ClassesService {
     return this.http.get(this.BASE_URL + this.CLASSES, {headers, observe: 'response'});
   }
 
+  deleteClass(code: string) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.CLASSES + '/' + code;
+    return this.http.delete(url, {headers, observe: 'response'});
+  }
+
 }
