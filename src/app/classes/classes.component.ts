@@ -34,6 +34,8 @@ export class ClassesComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.isTeacher()) {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'action'];
+    } else if (this.authService.isStudent()) {
+      this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserves'];
     }
     this.getClasses();
   }
@@ -92,6 +94,12 @@ export class ClassesComponent implements OnInit {
         }
       });
   }
+
+  reserveClass(aClass: Class) {
+    let user = this.authService.getLoggedUser();
+    console.log(user, aClass.code);
+  }
+
 
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
     const filter = (event.target as HTMLInputElement).value;
