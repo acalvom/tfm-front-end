@@ -9,6 +9,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-dialog.component';
+import {EditClassDialogComponent} from '../shared/components/edit-class-dialog/edit-class-dialog.component';
 
 @Component({
   selector: 'app-classes',
@@ -50,10 +51,10 @@ export class ClassesComponent implements OnInit {
       (newClass: Class) => {
         if (newClass) {
           let date = newClass.init_day_hour;
-          // newClass.code = newClass.init_day_hour.toLocaleString() + '-' + newClass.location;
           newClass.code = date.getDate().toString() + date.getMonth().toString() + date.getFullYear().toString() + date.getHours().toString()
             + date.getMinutes().toString() + newClass.location;
           this.classesService.createClass(newClass).subscribe(() => {
+            this.getClasses();
             this.snackBar.open('Class successfully created', 'OK', {duration: 3000});
           }, (error) => {
             this.snackBar.open('Class cannot be created: Error ' + error.status, 'OK', {duration: 3000});
@@ -72,6 +73,21 @@ export class ClassesComponent implements OnInit {
             this.getClasses();
           }, (error) => {
             this.snackBar.open('Class cannot be deleted: Error ' + error.status, 'OK', {duration: 3000});
+          });
+        }
+      });
+  }
+
+  updateClass(aClass: Class) {
+    this.dialog.open(EditClassDialogComponent, {data: aClass}).afterClosed().subscribe(
+      (editedClass: Class) => {
+        if (editedClass) {
+          console.log(editedClass);
+          this.classesService.editClass(aClass.code, editedClass).subscribe(() => {
+            this.snackBar.open('Class successfully edited', 'OK', {duration: 3000});
+            this.getClasses();
+          }, (error) => {
+            this.snackBar.open('Class cannot be edited: Error ' + error.status, 'OK', {duration: 3000});
           });
         }
       });
