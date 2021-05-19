@@ -10,6 +10,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-dialog.component';
 import {EditClassDialogComponent} from '../shared/components/edit-class-dialog/edit-class-dialog.component';
+import {ReservesService} from '../shared/services/reserves.service';
+import {Reserve} from '../shared/models/reserve.model';
 
 @Component({
   selector: 'app-classes',
@@ -27,6 +29,7 @@ export class ClassesComponent implements OnInit {
 
   constructor(public authService: AuthService,
               private classesService: ClassesService,
+              private reservesService:ReservesService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) {
   }
@@ -96,8 +99,16 @@ export class ClassesComponent implements OnInit {
   }
 
   reserveClass(aClass: Class) {
-    let user = this.authService.getLoggedUser();
-    console.log(user, aClass.code);
+    let reserve = new Reserve();
+    reserve.email_user = this.authService.getLoggedUser();
+    reserve.code_class = aClass.code;
+
+    // In progress
+    this.reservesService.createReserve(reserve).subscribe(
+      (response: Reserve) => {
+        console.log(response);
+      }
+    )
   }
 
 
