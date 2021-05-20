@@ -29,7 +29,7 @@ export class ClassesComponent implements OnInit {
 
   constructor(public authService: AuthService,
               private classesService: ClassesService,
-              private reservesService:ReservesService,
+              private reservesService: ReservesService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) {
   }
@@ -103,12 +103,12 @@ export class ClassesComponent implements OnInit {
     reserve.email_user = this.authService.getLoggedUser();
     reserve.code_class = aClass.code;
 
-    // In progress
+    // TODO
     this.reservesService.createReserve(reserve).subscribe(
-      (response: Reserve) => {
+      (response: any) => {
         console.log(response);
       }
-    )
+    );
   }
 
 
