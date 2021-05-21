@@ -10,6 +10,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-dialog.component';
 import {EditClassDialogComponent} from '../shared/components/edit-class-dialog/edit-class-dialog.component';
+import {ReservesService} from '../shared/services/reserves.service';
+import {Reserve} from '../shared/models/reserve.model';
 
 @Component({
   selector: 'app-classes',
@@ -27,6 +29,7 @@ export class ClassesComponent implements OnInit {
 
   constructor(public authService: AuthService,
               private classesService: ClassesService,
+              private reservesService: ReservesService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) {
   }
@@ -34,6 +37,8 @@ export class ClassesComponent implements OnInit {
   ngOnInit(): void {
     if (this.authService.isTeacher()) {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'action'];
+    } else if (this.authService.isStudent()) {
+      this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserves'];
     }
     this.getClasses();
   }
@@ -93,6 +98,20 @@ export class ClassesComponent implements OnInit {
       });
   }
 
+  reserveClass(aClass: Class) {
+    let reserve = new Reserve();
+    reserve.email_user = this.authService.getLoggedUser();
+    reserve.code_class = aClass.code;
+    this.reservesService.createReserve(reserve).subscribe(
+      () => {
+        this.snackBar.open('You are in!', 'OK', {duration: 3000});
+      },
+      () => {
+        this.snackBar.open('You have already reserve this class', 'OK', {duration: 3000});
+      });
+  }
+
+
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
     const filter = (event.target as HTMLInputElement).value;
     dataSource.filter = filter.trim().toLowerCase();
@@ -101,6 +120,7 @@ export class ClassesComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 
   generateClassFromArray(anyArray: any) {
     this.classes = [];
