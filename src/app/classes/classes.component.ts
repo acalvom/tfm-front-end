@@ -102,13 +102,13 @@ export class ClassesComponent implements OnInit {
     let reserve = new Reserve();
     reserve.email_user = this.authService.getLoggedUser();
     reserve.code_class = aClass.code;
-
-    // TODO
     this.reservesService.createReserve(reserve).subscribe(
-      (response: any) => {
-        console.log(response);
-      }
-    );
+      () => {
+        this.snackBar.open('You are in!', 'OK', {duration: 3000});
+      },
+      () => {
+        this.snackBar.open('You have already reserve this class', 'OK', {duration: 3000});
+      });
   }
 
 
@@ -120,6 +120,7 @@ export class ClassesComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
 
   generateClassFromArray(anyArray: any) {
     this.classes = [];
