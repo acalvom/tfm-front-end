@@ -39,6 +39,7 @@ export class ClassesComponent implements OnInit {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'action'];
     } else if (this.authService.isStudent()) {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserves'];
+      this.getReservesByUserEmail(this.authService.getLoggedUser())
     }
     this.getClasses();
   }
@@ -111,6 +112,12 @@ export class ClassesComponent implements OnInit {
       });
   }
 
+  getReservesByUserEmail(email: string) {
+    this.reservesService.getReservesByUserEmail(email).subscribe(
+      (response: any) => {
+        console.log(response)
+      });
+  }
 
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
     const filter = (event.target as HTMLInputElement).value;
