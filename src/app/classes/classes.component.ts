@@ -24,6 +24,7 @@ export class ClassesComponent implements OnInit {
   classes: Class[] = [];
   dataSource = new MatTableDataSource<Class>();
   reserves: Reserve[] = [];
+  authenticatedUser: string;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,11 +37,12 @@ export class ClassesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authenticatedUser = this.authService.getLoggedUser();
     if (this.authService.isTeacher()) {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'action'];
     } else if (this.authService.isStudent()) {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserves'];
-      this.getReservesByUserEmail(this.authService.getLoggedUser());
+      this.getReservesByUserEmail();
     }
     this.getClasses();
   }
@@ -50,7 +52,6 @@ export class ClassesComponent implements OnInit {
       (response: any) => {
         this.generateClassFromArray(response.body);
         this.setTableTools();
-        // this.readReserves();
       });
   }
 
@@ -107,6 +108,7 @@ export class ClassesComponent implements OnInit {
     reserve.code_class = aClass.code;
     this.reservesService.createReserve(reserve).subscribe(
       () => {
+        this.getReservesByUserEmail();
         this.snackBar.open('You are in!', 'OK', {duration: 3000});
       },
       () => {
@@ -114,24 +116,16 @@ export class ClassesComponent implements OnInit {
       });
   }
 
-  getReservesByUserEmail(email: string) {
-    this.reservesService.getReservesByUserEmail(email).subscribe(
+  getReservesByUserEmail() {
+    this.reservesService.getReservesByUserEmail(this.authenticatedUser).subscribe(
       (response: any) => {
         this.reserves = response.body;
       });
   }
 
   readReserves(code: string) {
-    let tempReserves = this.reserves;
-    let match = tempReserves.find(item => item.code_class === code);
-    if (match !== undefined) {
-      console.log('match ', match.code_class);
-      return true;
-    } else {
-      console.log(code + ' undef');
-      return false;
-    }
-
+    let match = this.reserves.find(item => item.code_class === code);
+    return match !== undefined;
   }
 
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
@@ -142,7 +136,6 @@ export class ClassesComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 
   generateClassFromArray(anyArray: any) {
     this.classes = [];
