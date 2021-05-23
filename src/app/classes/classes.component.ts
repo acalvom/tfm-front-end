@@ -23,6 +23,7 @@ export class ClassesComponent implements OnInit {
   columns: string[] = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout'];
   classes: Class[] = [];
   dataSource = new MatTableDataSource<Class>();
+  reserves: Reserve[] = [];
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -39,7 +40,7 @@ export class ClassesComponent implements OnInit {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'action'];
     } else if (this.authService.isStudent()) {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserves'];
-      this.getReservesByUserEmail(this.authService.getLoggedUser())
+      this.getReservesByUserEmail(this.authService.getLoggedUser());
     }
     this.getClasses();
   }
@@ -49,6 +50,7 @@ export class ClassesComponent implements OnInit {
       (response: any) => {
         this.generateClassFromArray(response.body);
         this.setTableTools();
+        // this.readReserves();
       });
   }
 
@@ -115,8 +117,21 @@ export class ClassesComponent implements OnInit {
   getReservesByUserEmail(email: string) {
     this.reservesService.getReservesByUserEmail(email).subscribe(
       (response: any) => {
-        console.log(response)
+        this.reserves = response.body;
       });
+  }
+
+  readReserves(code: string) {
+    let tempReserves = this.reserves;
+    let match = tempReserves.find(item => item.code_class === code);
+    if (match !== undefined) {
+      console.log('match ', match.code_class);
+      return true;
+    } else {
+      console.log(code + ' undef');
+      return false;
+    }
+
   }
 
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
