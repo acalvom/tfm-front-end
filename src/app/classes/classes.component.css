@@ -7,6 +7,10 @@ table {
   width: 100%;
 }
 
-#btn_reserve {
-  color: olivedrab;
+.mat-btn-reserve {
+  color: #b2f527;
+}
+
+.mat-btn-reserve [disabled] {
+  color: #6c7261;
 }

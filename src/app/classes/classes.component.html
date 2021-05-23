@@ -73,7 +73,8 @@
       <ng-container matColumnDef="reserves">
         <th id="reserves" mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
-          <button id="btn_reserve" mat-icon-button (click)="reserveClass(element)" title="Reserve Class">
+          <button mat-icon-button color="btn-reserve" (click)="reserveClass(element)"
+                  [disabled]="readReserves(element.code)" title="Reserve Class">
             <mat-icon>check_circle_outline</mat-icon>
           </button>
         </td>

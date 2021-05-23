@@ -10,6 +10,7 @@ export class ReservesService {
 
   private BASE_URL = 'http://localhost:8000';
   private RESERVES_CREATE = '/reserves/create';
+  private RESERVES = '/reserves';
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -18,5 +19,11 @@ export class ReservesService {
     const headers = this.authService.getHeaders();
     let url = this.BASE_URL + this.RESERVES_CREATE;
     return this.http.post(url, reserve, {headers, observe: 'response'});
+  }
+
+  getReservesByUserEmail(email: string) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.RESERVES + '/' + email;
+    return this.http.get(url, {headers, observe: 'response'});
   }
 }
