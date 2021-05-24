@@ -11,6 +11,7 @@ export class ClassesService {
   private BASE_URL = 'http://localhost:8000';
   private CLASSES_CREATE = '/classes/create';
   private CLASSES = '/classes';
+  private CLASSES_PLACES = '/classes/places';
 
 
   constructor(private http: HttpClient, private authService: AuthService) {
@@ -37,6 +38,12 @@ export class ClassesService {
     const headers = this.authService.getHeaders();
     const url = this.BASE_URL + this.CLASSES + '/' + code;
     return this.http.put(url, editedClass, {headers, observe: 'response'});
+  }
+
+  updateClassPlaces(code: string, value: number) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.CLASSES_PLACES + '/' + code;
+    return this.http.put(url, {value}, {headers, observe: 'response'});
   }
 
 }
