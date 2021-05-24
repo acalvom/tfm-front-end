@@ -118,7 +118,7 @@ export class ClassesComponent implements OnInit {
         this.updateClassPlaces(aClass.code, 1);
       },
       () => {
-        this.snackBar.open('You have already reserve this class', 'OK', {duration: 3000});
+        this.snackBar.open('You cannot reserve this class', 'OK', {duration: 3000});
       });
   }
 
@@ -144,6 +144,10 @@ export class ClassesComponent implements OnInit {
   readReserves(code: string) {
     let match = this.reserves.find(item => item.code_class === code);
     return match !== undefined;
+  }
+
+  disableReserveButton(aClass: Class) {
+    return aClass.isExpired() || aClass.current_places >= aClass.max_places;
   }
 
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
