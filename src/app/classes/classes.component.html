@@ -77,6 +77,10 @@
                   [disabled]="readReserves(element.code)" title="Reserve Class">
             <mat-icon>check_circle_outline</mat-icon>
           </button>
+          <button mat-icon-button color="btn-cancel" (click)="cancelReserve(element)"
+                  [disabled]="!readReserves(element.code)" title="Cancel Reserve">
+            <mat-icon>highlight_off</mat-icon>
+          </button>
         </td>
       </ng-container>
 
