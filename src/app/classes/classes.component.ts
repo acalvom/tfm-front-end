@@ -116,6 +116,17 @@ export class ClassesComponent implements OnInit {
       });
   }
 
+  cancelReserve(aClass: Class) {
+    let reserveId = this.reserves.find(item => item.code_class === aClass.code).id;
+    this.reservesService.deleteReserve(reserveId).subscribe(() => {
+        this.getReservesByUserEmail();
+        this.snackBar.open('Reserve cancelled', 'OK', {duration: 3000});
+      },
+      () => {
+        this.snackBar.open('Reserve cannot be cancelled', 'OK', {duration: 3000});
+      });
+  }
+
   getReservesByUserEmail() {
     this.reservesService.getReservesByUserEmail(this.authenticatedUser).subscribe(
       (response: any) => {
