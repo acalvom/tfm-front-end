@@ -66,7 +66,15 @@
           <button mat-icon-button color="accent" (click)="updateClass(element)" title="Update Class">
             <mat-icon>edit</mat-icon>
           </button>
+        </td>
+      </ng-container>
 
+      <ng-container matColumnDef="reserveDetail">
+        <th id="reserveDetail" mat-header-cell *matHeaderCellDef>See reserves</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="basic" (click)="getReservesByCodeClass(element)" title="List Reserves">
+            <mat-icon>list</mat-icon>
+          </button>
         </td>
       </ng-container>
 
