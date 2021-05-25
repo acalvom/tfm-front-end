@@ -12,6 +12,7 @@ import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-di
 import {EditClassDialogComponent} from '../shared/components/edit-class-dialog/edit-class-dialog.component';
 import {ReservesService} from '../shared/services/reserves.service';
 import {Reserve} from '../shared/models/reserve.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-classes',
@@ -32,6 +33,7 @@ export class ClassesComponent implements OnInit {
   constructor(public authService: AuthService,
               private classesService: ClassesService,
               private reservesService: ReservesService,
+              private router: Router,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) {
   }
@@ -143,9 +145,8 @@ export class ClassesComponent implements OnInit {
       });
   }
 
-  getReservesByCodeClass(aClass: Class) {
-    console.log(aClass.code);
-
+  getReservesByCodeClass(code: string) {
+    this.router.navigate(['/reserves', code]).then();
   }
 
   readReserves(code: string) {
