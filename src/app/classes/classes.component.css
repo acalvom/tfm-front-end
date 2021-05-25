@@ -8,9 +8,9 @@ table {
 }
 
 .mat-btn-reserve {
-  color: #b2f527;
+  color: yellowgreen;
 }
 
-.mat-btn-reserve [disabled] {
-  color: #6c7261;
+.mat-btn-cancel {
+  color: orange;
 }

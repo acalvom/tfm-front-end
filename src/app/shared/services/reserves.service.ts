@@ -21,6 +21,12 @@ export class ReservesService {
     return this.http.post(url, reserve, {headers, observe: 'response'});
   }
 
+  deleteReserve(id: number) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.RESERVES + '/' + id;
+    return this.http.delete(url, {headers, observe: 'response'});
+  }
+
   getReservesByUserEmail(email: string) {
     const headers = this.authService.getHeaders();
     const url = this.BASE_URL + this.RESERVES + '/' + email;

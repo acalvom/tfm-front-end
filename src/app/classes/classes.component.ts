@@ -91,7 +91,6 @@ export class ClassesComponent implements OnInit {
     this.dialog.open(EditClassDialogComponent, {data: aClass}).afterClosed().subscribe(
       (editedClass: Class) => {
         if (editedClass) {
-          console.log(editedClass);
           this.classesService.editClass(aClass.code, editedClass).subscribe(() => {
             this.snackBar.open('Class successfully edited', 'OK', {duration: 3000});
             this.getClasses();
@@ -102,6 +101,12 @@ export class ClassesComponent implements OnInit {
       });
   }
 
+  updateClassPlaces(code: string, value: number) {
+    this.classesService.updateClassPlaces(code, value).subscribe(() => {
+      this.getClasses();
+    });
+  }
+
   reserveClass(aClass: Class) {
     let reserve = new Reserve();
     reserve.email_user = this.authService.getLoggedUser();
@@ -110,9 +115,22 @@ export class ClassesComponent implements OnInit {
       () => {
         this.getReservesByUserEmail();
         this.snackBar.open('You are in!', 'OK', {duration: 3000});
+        this.updateClassPlaces(aClass.code, 1);
       },
       () => {
-        this.snackBar.open('You have already reserve this class', 'OK', {duration: 3000});
+        this.snackBar.open('You cannot reserve this class', 'OK', {duration: 3000});
+      });
+  }
+
+  cancelReserve(aClass: Class) {
+    let reserveId = this.reserves.find(item => item.code_class === aClass.code).id;
+    this.reservesService.deleteReserve(reserveId).subscribe(() => {
+        this.getReservesByUserEmail();
+        this.snackBar.open('Reserve cancelled', 'OK', {duration: 3000});
+        this.updateClassPlaces(aClass.code, -1);
+      },
+      () => {
+        this.snackBar.open('Reserve cannot be cancelled', 'OK', {duration: 3000});
       });
   }
 
@@ -126,6 +144,10 @@ export class ClassesComponent implements OnInit {
   readReserves(code: string) {
     let match = this.reserves.find(item => item.code_class === code);
     return match !== undefined;
+  }
+
+  disableReserveButton(aClass: Class) {
+    return aClass.isExpired() || aClass.current_places >= aClass.max_places;
   }
 
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
