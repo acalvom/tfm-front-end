@@ -18,6 +18,7 @@ export class ReservesUsersComponent implements OnInit {
   dataSource = new MatTableDataSource<StudentBasic>();
   code: string;
   reserves: Reserve[] = [];
+  statusCode: number;
 
   constructor(private route: ActivatedRoute,
               private reservesService: ReservesService,
@@ -34,6 +35,8 @@ export class ReservesUsersComponent implements OnInit {
       (response: any) => {
         this.reserves = response.body;
         this.generateStudentBasicFromArray(this.reserves);
+      }, error => {
+        this.statusCode = error.status;
       });
   }
 
@@ -44,6 +47,7 @@ export class ReservesUsersComponent implements OnInit {
         student.copyProperties(response.body[0]);
         this.students.push(student);
         this.dataSource.data = this.students;
+        console.log(this.dataSource);
       });
   }
 

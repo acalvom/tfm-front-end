@@ -1,6 +1,6 @@
 <div class="mx-3">
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+    <table *ngIf="statusCode !== 404" mat-table [dataSource]="dataSource">
       <caption>Reserves for class {{code}} </caption>
 
       <ng-container matColumnDef="name">
@@ -19,5 +19,7 @@
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
       <tr mat-row *matRowDef="let row; columns: columns;"></tr>
     </table>
+    <div *ngIf="statusCode === 404"><h1>There are no reserves for this class yet</h1></div>
+
   </div>
 </div>
