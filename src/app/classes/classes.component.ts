@@ -12,6 +12,7 @@ import {YesNoDialogComponent} from '../shared/components/yes-no-dialog/yes-no-di
 import {EditClassDialogComponent} from '../shared/components/edit-class-dialog/edit-class-dialog.component';
 import {ReservesService} from '../shared/services/reserves.service';
 import {Reserve} from '../shared/models/reserve.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-classes',
@@ -32,6 +33,7 @@ export class ClassesComponent implements OnInit {
   constructor(public authService: AuthService,
               private classesService: ClassesService,
               private reservesService: ReservesService,
+              private router: Router,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) {
   }
@@ -39,10 +41,12 @@ export class ClassesComponent implements OnInit {
   ngOnInit(): void {
     this.authenticatedUser = this.authService.getLoggedUser();
     if (this.authService.isTeacher()) {
-      this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'action'];
+      this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserveDetail', 'action'];
     } else if (this.authService.isStudent()) {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserves'];
       this.getReservesByUserEmail();
+    } else {
+      this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserveDetail'];
     }
     this.getClasses();
   }
@@ -139,6 +143,10 @@ export class ClassesComponent implements OnInit {
       (response: any) => {
         this.reserves = response.body;
       });
+  }
+
+  getReservesByCodeClass(code: string) {
+    this.router.navigate(['/reserves', code]).then();
   }
 
   readReserves(code: string) {

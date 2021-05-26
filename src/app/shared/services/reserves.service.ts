@@ -32,4 +32,10 @@ export class ReservesService {
     const url = this.BASE_URL + this.RESERVES + '/' + email;
     return this.http.get(url, {headers, observe: 'response'});
   }
+
+  getReservesByCodeClass(code: string) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.RESERVES + '/' + code + '/users' ;
+    return this.http.get(url, {headers, observe: 'response'});
+  }
 }

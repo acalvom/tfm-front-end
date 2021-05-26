@@ -34,6 +34,7 @@ import {EditWorkoutDialogComponent} from './shared/components/edit-workout-dialo
 import {ClassesComponent} from './classes/classes.component';
 import {CreateClassDialogComponent} from './shared/components/create-class-dialog/create-class-dialog.component';
 import {EditClassDialogComponent} from './shared/components/edit-class-dialog/edit-class-dialog.component';
+import {ReservesUsersComponent} from './reserves-users/reserves-users.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {EditClassDialogComponent} from './shared/components/edit-class-dialog/ed
     EditClassDialogComponent,
     BooleanYesNoPipe,
     ClassesComponent,
-    CreateClassDialogComponent
+    CreateClassDialogComponent,
+    ReservesUsersComponent
   ],
   imports: [
     AngularMaterialModule,
