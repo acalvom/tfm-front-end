@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Create News</h2>
+
+<mat-dialog-content [formGroup]="createNewsFormGroup">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput id="title" name="title" formControlName="title" required>
+    <mat-error *ngIf="createNewsFormGroup.get('title').invalid"> {{getErrorMessage('title')}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput id="description" name="description" formControlName="description" required></textarea>
+    <mat-error *ngIf="createNewsFormGroup.get('description').invalid"> {{getErrorMessage('description')}}</mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Cancel</button>
+  <button mat-raised-button color="primary" (click)='create()'
+          [formGroup]="createNewsFormGroup" [disabled]="createNewsFormGroup.invalid">Create
+  </button>
+
+</mat-dialog-actions>

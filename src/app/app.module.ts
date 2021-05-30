@@ -36,6 +36,7 @@ import {CreateClassDialogComponent} from './shared/components/create-class-dialo
 import {EditClassDialogComponent} from './shared/components/edit-class-dialog/edit-class-dialog.component';
 import {ReservesUsersComponent} from './reserves-users/reserves-users.component';
 import {NewsComponent} from './news/news.component';
+import {CreateNewsDialogComponent} from './shared/components/create-news-dialog/create-news-dialog.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {NewsComponent} from './news/news.component';
     ClassesComponent,
     CreateClassDialogComponent,
     ReservesUsersComponent,
-    NewsComponent
+    NewsComponent,
+    CreateNewsDialogComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -86,7 +88,8 @@ import {NewsComponent} from './news/news.component';
     CreateWorkoutDialogComponent,
     EditWorkoutDialogComponent,
     CreateClassDialogComponent,
-    EditClassDialogComponent
+    EditClassDialogComponent,
+    CreateNewsDialogComponent
   ]
 })
 export class AppModule {
