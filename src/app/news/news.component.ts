@@ -3,6 +3,8 @@ import {AuthService} from '../shared/services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateNewsDialogComponent} from '../shared/components/create-news-dialog/create-news-dialog.component';
 import {News} from '../shared/models/news.model';
+import {NewsService} from '../shared/services/news.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-news',
@@ -11,7 +13,10 @@ import {News} from '../shared/models/news.model';
 })
 export class NewsComponent implements OnInit {
 
-  constructor(public authService: AuthService, private dialog: MatDialog) {
+  constructor(public authService: AuthService,
+              private newsService: NewsService,
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -24,7 +29,12 @@ export class NewsComponent implements OnInit {
           let date = new Date();
           news.creation_date = date;
           news.code = news.dateToCode(date);
-          console.log(news);
+
+          this.newsService.createNews(news).subscribe(() => {
+            this.snackBar.open('News successfully created', 'OK', {duration: 3000});
+          }, (error) => {
+            this.snackBar.open('News cannot be created: Error ' + error.status, 'OK', {duration: 3000});
+          });
         }
       });
   }
