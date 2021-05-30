@@ -1,1 +1,10 @@
-<p>news works!</p>
+<div class="background">
+  <div class="row justify-content-end mr-5 mt-3">
+    <div class="example-button-container ">
+      <button *ngIf="!authService.isStudent()" mat-fab color="primary" (click)="createNews()"
+              title="Add News">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
