@@ -4,6 +4,9 @@
   <button mat-button routerLink="/home">Home
     <mat-icon>home</mat-icon>
   </button>
+  <button *ngIf="isAuthenticated()" mat-button routerLink="/news">News
+    <mat-icon>new_releases</mat-icon>
+  </button>
   <button *ngIf="isAdmin()" mat-button routerLink="/register">Register
     <mat-icon>person_add</mat-icon>
   </button>

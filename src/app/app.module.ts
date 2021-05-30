@@ -35,6 +35,7 @@ import {ClassesComponent} from './classes/classes.component';
 import {CreateClassDialogComponent} from './shared/components/create-class-dialog/create-class-dialog.component';
 import {EditClassDialogComponent} from './shared/components/edit-class-dialog/edit-class-dialog.component';
 import {ReservesUsersComponent} from './reserves-users/reserves-users.component';
+import {NewsComponent} from './news/news.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {ReservesUsersComponent} from './reserves-users/reserves-users.component'
     BooleanYesNoPipe,
     ClassesComponent,
     CreateClassDialogComponent,
-    ReservesUsersComponent
+    ReservesUsersComponent,
+    NewsComponent
   ],
   imports: [
     AngularMaterialModule,
