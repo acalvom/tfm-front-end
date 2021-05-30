@@ -22,8 +22,6 @@ export class CreateNewsDialogComponent {
   create() {
     let news = new News();
     news.copyProperties(this.createNewsFormGroup.value);
-    news.creation_date = new Date();
-    console.log(news);
     this.dialog.close(news);
   }
 

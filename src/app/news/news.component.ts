@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../shared/services/auth.service';
+import {MatDialog} from '@angular/material/dialog';
+import {CreateNewsDialogComponent} from '../shared/components/create-news-dialog/create-news-dialog.component';
+import {News} from '../shared/models/news.model';
 
 @Component({
   selector: 'app-news',
@@ -8,13 +11,22 @@ import {AuthService} from '../shared/services/auth.service';
 })
 export class NewsComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
   }
 
   createNews() {
-    console.log('clicked')
+    this.dialog.open(CreateNewsDialogComponent).afterClosed().subscribe(
+      (news: News) => {
+        if (news) {
+          let date = new Date();
+          news.creation_date = date;
+          news.code = news.dateToCode(date);
+          console.log(news);
+        }
+      });
   }
 
 }
