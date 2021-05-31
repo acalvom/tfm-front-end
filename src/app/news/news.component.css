@@ -6,8 +6,12 @@
   padding: 50px;
 }
 
+.content > mat-card {
+  width: 350px;
+}
+
 .mat-card {
-  width: 300px;
+  border: 5px solid #c2185b;
 }
 
 .header-image {
