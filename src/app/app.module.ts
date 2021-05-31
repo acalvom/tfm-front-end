@@ -37,6 +37,7 @@ import {EditClassDialogComponent} from './shared/components/edit-class-dialog/ed
 import {ReservesUsersComponent} from './reserves-users/reserves-users.component';
 import {NewsComponent} from './news/news.component';
 import {CreateNewsDialogComponent} from './shared/components/create-news-dialog/create-news-dialog.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {CreateNewsDialogComponent} from './shared/components/create-news-dialog/
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
+    FlexLayoutModule,
     HttpClientModule
   ],
   providers: [
