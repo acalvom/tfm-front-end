@@ -10,6 +10,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {WorkoutsComponent} from './workouts/workouts.component';
 import {ClassesComponent} from './classes/classes.component';
 import {ReservesUsersComponent} from './reserves-users/reserves-users.component';
+import {NewsComponent} from './news/news.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'workouts', component: WorkoutsComponent},
   {path: 'classes', component: ClassesComponent},
-  {path: 'reserves/:code', component: ReservesUsersComponent}
+  {path: 'reserves/:code', component: ReservesUsersComponent},
+  {path: 'news', component: NewsComponent}
 ];
 
 @NgModule({
