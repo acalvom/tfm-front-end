@@ -1,14 +1,16 @@
 .background {
   background-image: url(../../assets/images/newsBackground.jpg);
+  height: inherit;
+  min-height: 92%;
 }
+
 
 .content {
   padding: 50px;
 }
 
 .mat-card {
-  width: 500px;
-
+  width: auto;
 }
 
 .mat-card-header {
