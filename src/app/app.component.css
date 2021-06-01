@@ -2,3 +2,7 @@
   align-items: center;
   flex: 1 0 auto;
 }
+
+#logo {
+  height: 64px;
+}
