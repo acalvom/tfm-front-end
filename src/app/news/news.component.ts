@@ -13,6 +13,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class NewsComponent implements OnInit {
 
+  news: News[] = [];
+
   constructor(public authService: AuthService,
               private newsService: NewsService,
               private dialog: MatDialog,
@@ -20,6 +22,7 @@ export class NewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getLastNews();
   }
 
   createNews() {
@@ -37,6 +40,22 @@ export class NewsComponent implements OnInit {
           });
         }
       });
+  }
+
+  getLastNews() {
+    this.newsService.getLastNews().subscribe(
+      (response: any) => {
+        this.generateNewsFromArray(response.body);
+      });
+  }
+
+  generateNewsFromArray(anyArray: any) {
+    this.news = [];
+    for (let key in anyArray) {
+      let news = new News();
+      news.copyProperties(anyArray[key]);
+      this.news.push(news);
+    }
   }
 
 }
