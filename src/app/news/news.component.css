@@ -6,16 +6,35 @@
   padding: 50px;
 }
 
-.content > mat-card {
-  width: 350px;
-}
-
 .mat-card {
-  border: 5px solid #c2185b;
+  width: 500px;
+
 }
 
-.header-image {
-  background-image: url(../../assets/images/large_logo.png);
-  background-size: cover;
-  background-repeat: no-repeat;
+.mat-card-header {
+  text-align: center;
+  display: contents;
+  text-transform: uppercase;
+  font-size: 25px;
+}
+
+.card__content {
+  width: 90%;
+  height: 95%;
+  background: #191a19;
+  margin: 10px auto;
+  border-radius: 5px;
+  padding: 20px;
+  cursor: pointer;
+  box-shadow: 16px 16px 44px #0a0a0a,
+  -16px -16px 44px #282a28;
+  transition: 0.3s all ease-in-out;
+  border: 5px solid #c2185b;
+
+}
+
+.card__info {
+  text-align: left;
+  font-size: 15px;
+  margin: 40px auto;
 }
