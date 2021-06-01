@@ -10,7 +10,7 @@
 
   <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid" fxLayoutAlign="center">
-      <div fxFlex="33%" *ngFor="let aNew of news">
+      <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let aNew of news">
         <mat-card class="mat-elevation-z4">
           <div class="card__content">
             <mat-card-header>
@@ -20,8 +20,8 @@
             <mat-card-content>
               <p class="card__info">{{aNew.description}}</p>
             </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>Delete</button>
+            <mat-card-actions *ngIf="!authService.isStudent()">
+              <button mat-button (click)="deleteNews(aNew.code)">Delete</button>
             </mat-card-actions>
           </div>
         </mat-card>

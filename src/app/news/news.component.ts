@@ -49,6 +49,10 @@ export class NewsComponent implements OnInit {
       });
   }
 
+  deleteNews(code: string) {
+    console.log(code);
+  }
+
   generateNewsFromArray(anyArray: any) {
     this.news = [];
     for (let key in anyArray) {
