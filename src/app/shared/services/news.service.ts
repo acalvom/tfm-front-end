@@ -26,4 +26,10 @@ export class NewsService {
     const headers = this.authService.getHeaders();
     return this.http.get(this.BASE_URL + this.NEWS, {headers, observe: 'response'});
   }
+
+  deleteNews(code: string) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.NEWS + '/' + code;
+    return this.http.delete(url, {headers, observe: 'response'});
+  }
 }
