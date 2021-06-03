@@ -13,7 +13,7 @@ import {StudentBasic} from '../shared/models/student-basic.model';
 })
 export class ReservesUsersComponent implements OnInit {
 
-  columns: string[] = ['name', 'surname', 'email'];
+  columns: string[] = ['name', 'surname', 'email', 'attendance'];
   students: StudentBasic[] = [];
   dataSource = new MatTableDataSource<StudentBasic>();
   code: string;
@@ -47,8 +47,12 @@ export class ReservesUsersComponent implements OnInit {
         student.copyProperties(response.body[0]);
         this.students.push(student);
         this.dataSource.data = this.students;
-        console.log(this.dataSource);
       });
+  }
+
+  setPenalty(email: string, penalty: number) {
+    console.log(email, penalty);
+
   }
 
   generateStudentBasicFromArray(anyArray: any) {
