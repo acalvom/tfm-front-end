@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ReservesService} from '../shared/services/reserves.service';
 import {UsersService} from '../shared/services/users.service';
 import {StudentBasic} from '../shared/models/student-basic.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reserves-users',
@@ -22,7 +23,8 @@ export class ReservesUsersComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private reservesService: ReservesService,
-              private userService: UsersService) {
+              private userService: UsersService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -50,9 +52,12 @@ export class ReservesUsersComponent implements OnInit {
       });
   }
 
-  setPenalty(email: string, penalty: number) {
-    console.log(email, penalty);
-
+  setPenalties(email: string, penalties: number) {
+    this.userService.setPenalties(email, penalties).subscribe(() => {
+      this.snackBar.open('Set', 'OK', {duration: 1000});
+    }, (error) => {
+      this.snackBar.open('Cannot set penalty: Error ' + error.status, 'OK', {duration: 3000});
+    });
   }
 
   generateStudentBasicFromArray(anyArray: any) {
