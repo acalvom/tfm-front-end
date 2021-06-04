@@ -11,6 +11,7 @@ export class UsersService {
   private BASE_URL = 'http://localhost:8000';
   private USERS = '/users';
   private STUDENTS = '/users/students';
+  private PENALTIES = '/users/penalties';
   private PASSWORD = '/users/password';
   private PHONE = '/users/phone';
 
@@ -43,6 +44,12 @@ export class UsersService {
     const headers = this.authService.getHeaders();
     const url = this.BASE_URL + this.USERS + '/' + userEmail;
     return this.http.put(url, editedUser, {headers, observe: 'response'});
+  }
+
+  setPenalties(userEmail: string, penalties: number) {
+    const headers = this.authService.getHeaders();
+    const url = this.BASE_URL + this.PENALTIES + '/' + userEmail;
+    return this.http.put(url, {penalties}, {headers, observe: 'response'});
   }
 
   changePassword(userEmail: string, passwords: JSON) {
