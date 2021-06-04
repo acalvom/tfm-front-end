@@ -34,3 +34,9 @@ mat-form-field {
 button {
   margin-right: 10px;
 }
+
+.background {
+  background-image: url(../../assets/images/sixDisks.jpg);
+  height: inherit;
+  min-height: 92%;
+}
