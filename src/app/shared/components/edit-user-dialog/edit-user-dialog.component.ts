@@ -6,7 +6,7 @@ import {User} from '../../models/user.model';
 @Component({
   selector: 'app-edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
-  styleUrls: ['./edit-user-dialog.component.css']
+  styleUrls: ['../dialog-style.css']
 })
 export class EditUserDialogComponent implements OnInit {
 
