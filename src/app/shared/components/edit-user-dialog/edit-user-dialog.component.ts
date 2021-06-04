@@ -6,7 +6,7 @@ import {User} from '../../models/user.model';
 @Component({
   selector: 'app-edit-user-dialog',
   templateUrl: './edit-user-dialog.component.html',
-  styleUrls: ['./edit-user-dialog.component.css']
+  styleUrls: ['../dialog-style.css']
 })
 export class EditUserDialogComponent implements OnInit {
 
@@ -25,6 +25,7 @@ export class EditUserDialogComponent implements OnInit {
     dni: new FormControl('', [Validators.pattern(this.dniPattern)]),
     gender: new FormControl(''),
     email: new FormControl('', [Validators.email]),
+    penalties: new FormControl('')
   });
 
 
@@ -44,23 +45,15 @@ export class EditUserDialogComponent implements OnInit {
   }
 
   update() {
+    let form;
+    form = (this.editUserFormGroup.value);
+    for (let key in form) {
+      if (form[key] === '') {
+        form[key] = this.data[key];
+      }
+    }
     let user = new User();
-    user.copyProperties(this.editUserFormGroup.value);
-    if (user.name === '') {
-      user.name = this.data.name;
-    }
-    if (user.surname === '') {
-      user.surname = this.data.surname;
-    }
-    if (user.dni === '') {
-      user.dni = this.data.dni;
-    }
-    if (user.gender === '') {
-      user.gender = this.data.gender;
-    }
-    if (user.email === '') {
-      user.email = this.data.email;
-    }
+    user.copyProperties(form);
     this.dialog.close(user);
   }
 

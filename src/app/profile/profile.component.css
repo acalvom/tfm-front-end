@@ -23,8 +23,8 @@ mat-card {
 
 img {
   text-align: center;
-  width: 100%;
-  height: auto;
+  max-height: 92vh;
+  width: auto;
 }
 
 mat-form-field {
@@ -33,4 +33,10 @@ mat-form-field {
 
 button {
   margin-right: 10px;
+}
+
+.background {
+  background-image: url(../../assets/images/sixDisks.jpg);
+  height: inherit;
+  min-height: 92%;
 }
