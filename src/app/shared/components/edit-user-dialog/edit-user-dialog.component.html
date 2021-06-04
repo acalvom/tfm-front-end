@@ -30,6 +30,11 @@
     <input matInput placeholder="user@example.com" id="email" name="email" formControlName="email">
     <mat-error *ngIf="editUserFormGroup.get('email').invalid"> {{getErrorMessage()}}</mat-error>
   </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Penalties</mat-label>
+    <input matInput id="penalties" name="penalties" formControlName="penalties">
+  </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions>
