@@ -23,8 +23,8 @@ mat-card {
 
 img {
   text-align: center;
-  width: 100%;
-  height: auto;
+  max-height: 92vh;
+  width: auto;
 }
 
 mat-form-field {
