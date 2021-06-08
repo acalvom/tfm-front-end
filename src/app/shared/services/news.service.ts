@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {News} from '../models/news.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
 
-  private BASE_URL = 'http://localhost:8000';
+  private BASE_URL = environment.BASE_URL;
   private NEWS_CREATE = '/news/create';
   private NEWS = '/news';
 

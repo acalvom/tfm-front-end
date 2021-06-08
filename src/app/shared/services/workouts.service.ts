@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {Workout} from '../models/workout.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutsService {
 
-  private BASE_URL = 'http://localhost:8000';
+  private BASE_URL = environment.BASE_URL;
   private WORKOUTS_CREATE = '/workouts/create';
   private WORKOUTS = '/workouts';
 

@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../models/user.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private BASE_URL = 'http://localhost:8000';
+  private BASE_URL = environment.BASE_URL;
   private USERS = '/users';
   private LOGIN = '/login';
   private REGISTER = '/register';

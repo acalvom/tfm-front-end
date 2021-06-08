@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {Class} from '../models/class.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassesService {
 
-  private BASE_URL = 'http://localhost:8000';
+  private BASE_URL = environment.BASE_URL;
   private CLASSES_CREATE = '/classes/create';
   private CLASSES = '/classes';
   private CLASSES_PLACES = '/classes/places';
