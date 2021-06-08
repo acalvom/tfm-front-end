@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {Reserve} from '../models/reserve.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservesService {
 
-  private BASE_URL = 'http://localhost:8000';
+  private BASE_URL = environment.BASE_URL;
   private RESERVES_CREATE = '/reserves/create';
   private RESERVES = '/reserves';
 
