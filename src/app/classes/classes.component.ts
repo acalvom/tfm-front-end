@@ -14,6 +14,7 @@ import {ReservesService} from '../shared/services/reserves.service';
 import {Reserve} from '../shared/models/reserve.model';
 import {Router} from '@angular/router';
 import {UsersService} from '../shared/services/users.service';
+import {WarningPenaltiesDialogComponent} from '../shared/components/warning-penalties-dialog/warning-penalties-dialog.component';
 
 @Component({
   selector: 'app-classes',
@@ -143,7 +144,7 @@ export class ClassesComponent implements OnInit {
   }
 
   warningReserve() {
-    console.log('dialog open');
+    this.dialog.open(WarningPenaltiesDialogComponent, {data: this.authUserPenalties});
   }
 
   getUserPenalties() {
