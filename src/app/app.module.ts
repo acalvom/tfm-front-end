@@ -38,6 +38,7 @@ import {ReservesUsersComponent} from './reserves-users/reserves-users.component'
 import {NewsComponent} from './news/news.component';
 import {CreateNewsDialogComponent} from './shared/components/create-news-dialog/create-news-dialog.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {WarningPenaltiesDialogComponent} from './shared/components/warning-penalties-dialog/warning-penalties-dialog.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     CreateClassDialogComponent,
     ReservesUsersComponent,
     NewsComponent,
-    CreateNewsDialogComponent
+    CreateNewsDialogComponent,
+    WarningPenaltiesDialogComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -91,7 +93,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     EditWorkoutDialogComponent,
     CreateClassDialogComponent,
     EditClassDialogComponent,
-    CreateNewsDialogComponent
+    CreateNewsDialogComponent,
+    WarningPenaltiesDialogComponent
   ]
 })
 export class AppModule {

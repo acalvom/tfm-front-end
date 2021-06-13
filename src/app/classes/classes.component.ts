@@ -13,6 +13,8 @@ import {EditClassDialogComponent} from '../shared/components/edit-class-dialog/e
 import {ReservesService} from '../shared/services/reserves.service';
 import {Reserve} from '../shared/models/reserve.model';
 import {Router} from '@angular/router';
+import {UsersService} from '../shared/services/users.service';
+import {WarningPenaltiesDialogComponent} from '../shared/components/warning-penalties-dialog/warning-penalties-dialog.component';
 
 @Component({
   selector: 'app-classes',
@@ -26,11 +28,13 @@ export class ClassesComponent implements OnInit {
   dataSource = new MatTableDataSource<Class>();
   reserves: Reserve[] = [];
   authenticatedUser: string;
+  authUserPenalties: number;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public authService: AuthService,
+              private usersService: UsersService,
               private classesService: ClassesService,
               private reservesService: ReservesService,
               private router: Router,
@@ -45,6 +49,7 @@ export class ClassesComponent implements OnInit {
     } else if (this.authService.isStudent()) {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserves'];
       this.getReservesByUserEmail();
+      this.getUserPenalties();
     } else {
       this.columns = ['code', 'init_day_hour', 'end_day_hour', 'max_places', 'current_places', 'location', 'location_details', 'id_workout', 'reserveDetail'];
     }
@@ -138,6 +143,18 @@ export class ClassesComponent implements OnInit {
       });
   }
 
+  warningReserve() {
+    this.dialog.open(WarningPenaltiesDialogComponent, {data: this.authUserPenalties});
+  }
+
+  getUserPenalties() {
+    this.usersService.getUserByEmail(this.authenticatedUser).subscribe(
+      (response: any) => {
+        this.authUserPenalties = response.body[0].penalties;
+      }
+    );
+  }
+
   getReservesByUserEmail() {
     this.reservesService.getReservesByUserEmail(this.authenticatedUser).subscribe(
       (response: any) => {
@@ -155,7 +172,7 @@ export class ClassesComponent implements OnInit {
   }
 
   disableReserveButton(aClass: Class) {
-    return aClass.isExpired() || aClass.current_places >= aClass.max_places;
+    return aClass.isExpired() || aClass.current_places >= aClass.max_places || this.authUserPenalties > 1;
   }
 
   applyFilter(event: Event, dataSource: MatTableDataSource<Class>) {
