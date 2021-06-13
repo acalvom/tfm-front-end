@@ -13,6 +13,7 @@ import {EditClassDialogComponent} from '../shared/components/edit-class-dialog/e
 import {ReservesService} from '../shared/services/reserves.service';
 import {Reserve} from '../shared/models/reserve.model';
 import {Router} from '@angular/router';
+import {UsersService} from '../shared/services/users.service';
 
 @Component({
   selector: 'app-classes',
@@ -31,6 +32,7 @@ export class ClassesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public authService: AuthService,
+              private usersService: UsersService,
               private classesService: ClassesService,
               private reservesService: ReservesService,
               private router: Router,
@@ -136,6 +138,14 @@ export class ClassesComponent implements OnInit {
       () => {
         this.snackBar.open('Reserve cannot be cancelled', 'OK', {duration: 3000});
       });
+  }
+
+  warningReserve() {
+    this.usersService.getUserByEmail(this.authenticatedUser).subscribe(
+      (response: any) => {
+        console.log(response.body[0].penalties);
+      }
+    );
   }
 
   getReservesByUserEmail() {

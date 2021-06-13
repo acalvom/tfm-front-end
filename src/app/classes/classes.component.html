@@ -89,6 +89,9 @@
                   [disabled]="!readReserves(element.code)" title="Cancel Reserve">
             <mat-icon>highlight_off</mat-icon>
           </button>
+          <button mat-icon-button color="btn-warning" (click)="warningReserve()" title="Warning Reserve">
+            <mat-icon>warning</mat-icon>
+          </button>
         </td>
       </ng-container>
 
