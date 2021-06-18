@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 
@@ -7,7 +7,7 @@ import {MatDialogRef} from '@angular/material/dialog';
   templateUrl: './change-password-dialog.component.html',
   styleUrls: ['../dialog-style.css']
 })
-export class ChangePasswordDialogComponent implements OnInit {
+export class ChangePasswordDialogComponent {
 
   hide = true;
   changePasswordFormGroup = new FormGroup({
@@ -19,8 +19,6 @@ export class ChangePasswordDialogComponent implements OnInit {
   constructor(public dialog: MatDialogRef<ChangePasswordDialogComponent>) {
   }
 
-  ngOnInit(): void {
-  }
 
   getErrorMessage(field: string) {
     if (this.changePasswordFormGroup.get(field).hasError('required')) {

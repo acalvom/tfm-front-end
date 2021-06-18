@@ -57,7 +57,11 @@ export class RegisterComponent {
     user.email = this.userFormGroup.get('email').value;
     user.password = AES.encrypt(this.userFormGroup.get('password').value, 'password').toString();
     user.role = this.userFormGroup.get('role').value;
-    user.role === 'student' ? user.penalties = 0 : user.penalties = null;
+    if (user.role === 'student') {
+      user.penalties = 0;
+    } else {
+      user.penalties = null;
+    }
     return user;
   }
 

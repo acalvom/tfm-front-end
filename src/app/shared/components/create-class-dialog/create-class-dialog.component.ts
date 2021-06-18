@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Class} from '../../models/class.model';
@@ -9,7 +9,7 @@ import {WorkoutsService} from '../../services/workouts.service';
   templateUrl: './create-class-dialog.component.html',
   styleUrls: ['../dialog-style.css']
 })
-export class CreateClassDialogComponent implements OnInit {
+export class CreateClassDialogComponent {
 
   workout_idErrorMsg: string;
   workout_idError: boolean;
@@ -24,9 +24,6 @@ export class CreateClassDialogComponent implements OnInit {
   });
 
   constructor(public dialog: MatDialogRef<CreateClassDialogComponent>, private workoutService: WorkoutsService) {
-  }
-
-  ngOnInit(): void {
   }
 
   create() {

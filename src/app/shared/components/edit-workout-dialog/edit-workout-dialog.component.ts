@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Workout} from '../../models/workout.model';
@@ -8,7 +8,7 @@ import {Workout} from '../../models/workout.model';
   templateUrl: './edit-workout-dialog.component.html',
   styleUrls: ['../dialog-style.css']
 })
-export class EditWorkoutDialogComponent implements OnInit {
+export class EditWorkoutDialogComponent {
 
   editWorkoutFormGroup = new FormGroup({
     title: new FormControl(''),
@@ -23,9 +23,6 @@ export class EditWorkoutDialogComponent implements OnInit {
 
   constructor(public dialog: MatDialogRef<EditWorkoutDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Workout) {
-  }
-
-  ngOnInit(): void {
   }
 
   update() {

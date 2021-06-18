@@ -42,7 +42,7 @@ export class AdminComponent extends UsersComponent implements OnInit {
   deleteUser(user: User) {
     let data = 'Do you really want to delete user ' + user.email + ' ?';
     this.dialog.open(YesNoDialogComponent, {data: data}).afterClosed().subscribe(
-      (remove: Boolean) => {
+      (remove: boolean) => {
         if (remove) {
           this.userService.deleteUser(user.email).subscribe(() => {
             this.snackBar.open('User successfully deleted', 'OK', {duration: 5000});

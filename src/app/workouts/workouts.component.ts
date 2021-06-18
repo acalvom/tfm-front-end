@@ -65,7 +65,7 @@ export class WorkoutsComponent implements OnInit {
   deleteWorkout(workout: Workout) {
     let data = 'Do you really want to delete workout ' + workout.id + ' ?';
     this.dialog.open(YesNoDialogComponent, {data: data}).afterClosed().subscribe(
-      (remove: Boolean) => {
+      (remove: boolean) => {
         if (remove) {
           this.workoutService.deleteWorkout(workout.id).subscribe(() => {
             this.snackBar.open('Workout successfully deleted', 'OK', {duration: 3000});
@@ -111,8 +111,8 @@ export class WorkoutsComponent implements OnInit {
   }
 
   setTableTools() {
-    this.dataSource.data = this.workouts as Workout[];
-    this.dataSource.sort = this.sort as MatSort;
+    this.dataSource.data = this.workouts;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 }
