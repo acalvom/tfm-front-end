@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {User} from '../../models/user.model';
@@ -8,15 +8,12 @@ import {User} from '../../models/user.model';
   templateUrl: './edit-user-dialog.component.html',
   styleUrls: ['../dialog-style.css']
 })
-export class EditUserDialogComponent implements OnInit {
+export class EditUserDialogComponent {
 
   dniPattern = '^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$';
 
   constructor(public dialog: MatDialogRef<EditUserDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: User) {
-  }
-
-  ngOnInit(): void {
   }
 
   editUserFormGroup = new FormGroup({

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 
@@ -7,7 +7,7 @@ import {MatDialogRef} from '@angular/material/dialog';
   templateUrl: './add-phone-dialog.component.html',
   styleUrls: ['../dialog-style.css']
 })
-export class AddPhoneDialogComponent implements OnInit {
+export class AddPhoneDialogComponent {
 
   phonePattern = '^[6][0-9]{8}$';
   phone = new FormControl('', [Validators.required, Validators.pattern(this.phonePattern)]);
@@ -16,8 +16,6 @@ export class AddPhoneDialogComponent implements OnInit {
   constructor(public dialog: MatDialogRef<AddPhoneDialogComponent>) {
   }
 
-  ngOnInit(): void {
-  }
 
   add() {
     if (this.phone.valid) {

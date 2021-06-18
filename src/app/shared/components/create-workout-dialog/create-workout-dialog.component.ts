@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Workout} from '../../models/workout.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -8,7 +8,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './create-workout-dialog.component.html',
   styleUrls: ['../dialog-style.css']
 })
-export class CreateWorkoutDialogComponent implements OnInit {
+export class CreateWorkoutDialogComponent {
 
   createWorkoutFormGroup = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -23,9 +23,6 @@ export class CreateWorkoutDialogComponent implements OnInit {
 
   constructor(public dialog: MatDialogRef<CreateWorkoutDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Workout) {
-  }
-
-  ngOnInit(): void {
   }
 
   create() {
