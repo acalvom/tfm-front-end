@@ -53,7 +53,7 @@ export class NewsComponent implements OnInit {
   deleteNews(code: string) {
     let data = 'Do you really want to delete this board?';
     this.dialog.open(YesNoDialogComponent, {data: data}).afterClosed().subscribe(
-      (remove: Boolean) => {
+      (remove: boolean) => {
         if (remove) {
           this.newsService.deleteNews(code).subscribe(() => {
             this.snackBar.open('Board successfully deleted', 'OK', {duration: 3000});

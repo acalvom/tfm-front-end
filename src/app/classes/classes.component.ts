@@ -84,7 +84,7 @@ export class ClassesComponent implements OnInit {
   deleteClass(aClass: Class) {
     let data = 'Do you really want to delete class ' + aClass.code + ' ?';
     this.dialog.open(YesNoDialogComponent, {data: data}).afterClosed().subscribe(
-      (remove: Boolean) => {
+      (remove: boolean) => {
         if (remove) {
           this.classesService.deleteClass(aClass.code).subscribe(() => {
             this.snackBar.open('Class successfully deleted', 'OK', {duration: 3000});
@@ -194,8 +194,8 @@ export class ClassesComponent implements OnInit {
   }
 
   setTableTools() {
-    this.dataSource.data = this.classes as Class[];
-    this.dataSource.sort = this.sort as MatSort;
+    this.dataSource.data = this.classes;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 

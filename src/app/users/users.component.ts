@@ -51,8 +51,8 @@ export class UsersComponent implements OnInit {
   }
 
   setTableTools() {
-    this.dataSource.data = this.users as User[];
-    this.dataSource.sort = this.sort as MatSort;
+    this.dataSource.data = this.users;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
